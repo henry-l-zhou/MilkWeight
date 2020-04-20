@@ -85,7 +85,7 @@ public class AddDataPage {
 		HBox hBox = new HBox();
 		Button backButton = new Button("Back");
 		backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
-		backButton.setMinSize(100, 30);
+		backButton.setMinSize(100, 35);
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -95,11 +95,11 @@ public class AddDataPage {
 
 		Button homeButton = new Button("Home");
 		homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
-		homeButton.setMinSize(100, 30);
+		homeButton.setMinSize(100, 35);
 		homeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				// go to add by file input class
+				Main.goToMainPageScene();
 			}
 		});
 

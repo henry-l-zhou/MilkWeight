@@ -45,7 +45,7 @@ public class MainPageScene {
         editDataButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				Main.goToAddDataPage();
+				Main.goToAddDataScene();
 			}
         });
         
