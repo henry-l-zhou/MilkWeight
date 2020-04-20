@@ -54,7 +54,8 @@ public class MainPageScene {
         exitButton.setStyle("-fx-background-color: #f8f8ff; -fx-border-color: #000000");
         
         //Title Label setup
-        Label titleLabel = new Label("  Milk Weight Organizer  ");
+        Label titleLabel = new Label("Milk Weight Organizer");
+        titleLabel.setAlignment(Pos.CENTER);
         titleLabel.setStyle("-fx-background-color: #f8f8ff; -fx-border-color: #000000");
         
         DoubleProperty fontSize = new SimpleDoubleProperty(20); // font size in pt

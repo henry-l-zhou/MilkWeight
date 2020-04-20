@@ -32,7 +32,10 @@ public class Main extends Application {
     	stage.setScene(DisplayDataScene.getScene());
     	stage.show();
     }
-    
+    public static void goToAddDataPage() {
+    	stage.setScene(AddDataPage.getScene());
+    	stage.show();
+    }
     
     /**
      * @param args
