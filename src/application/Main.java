@@ -29,7 +29,7 @@ public class Main extends Application {
     }
     
     public static void goToDisplayDataScene() {
-    	stage.setScene(DisplayDataScene.getScene());
+    	stage.setScene(AnnualReportPage.getScene());
     	stage.show();
     }
     public static void goToAddDataPage() {
