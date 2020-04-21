@@ -33,7 +33,7 @@ public class DisplayDataScene {
     titleLabel.setAlignment(Pos.CENTER);
     titleLabel.setMinSize(460, 30);
 
-    //Farm Report Button setup
+    // Farm Report Button setup
     Button farmReportButton = new Button("Farm Report");
     farmReportButton.setMinSize(180, 120);
     farmReportButton.setStyle("-fx-background-color: #c679ec; -fx-border-color: #000000");
@@ -44,7 +44,7 @@ public class DisplayDataScene {
       }
     });
 
-    //Annual Report Button setup
+    // Annual Report Button setup
     Button annualReportButton = new Button("Annual Report");
     annualReportButton.setMinSize(180, 120);
     annualReportButton.setStyle("-fx-background-color: #87CEEB; -fx-border-color: #000000");
@@ -55,7 +55,7 @@ public class DisplayDataScene {
       }
     });
 
-    //Date Range Report Button setup
+    // Date Range Report Button setup
     Button dateRangeReportButton = new Button("Date Range Report");
     dateRangeReportButton.setMinSize(180, 120);
     dateRangeReportButton.setStyle("-fx-background-color: #fbfbd0; -fx-border-color: #000000");
@@ -66,7 +66,7 @@ public class DisplayDataScene {
       }
     });
 
-    //Monthly Report Button setup
+    // Monthly Report Button setup
     Button monthlyReportButton = new Button("Monthly Report");
     monthlyReportButton.setMinSize(180, 120);
     monthlyReportButton.setStyle("-fx-background-color: #ff6666; -fx-border-color: #000000");
@@ -88,7 +88,7 @@ public class DisplayDataScene {
       }
     });
 
-    //Back Button Setup
+    // Back Button Setup
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
     backButton.setMinSize(100, 35);
     backButton.setOnAction(new EventHandler<ActionEvent>() {

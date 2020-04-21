@@ -36,7 +36,7 @@ public class Main extends Application {
     stage.setScene(EditDataScene.getScene());
     sceneStack.push(EditDataScene.getScene());
     stage.show();
-   
+
   }
 
   public static void goToDisplayDataScene() {
@@ -52,28 +52,28 @@ public class Main extends Application {
   }
 
   public static void goToRemoveDataScene() {
-    //stage.setScene(RemoveDataPage.getScene());
+    // stage.setScene(RemoveDataPage.getScene());
     stage.show();
   }
 
-  //this goes to the scene after the edit button is clicked on the edit data page
+  // this goes to the scene after the edit button is clicked on the edit data page
   public static void goToEditScene() {
-    //stage.setScene(EditPage.getScene());
+    // stage.setScene(EditPage.getScene());
     stage.show();
   }
 
   public static void goToFarmReportScene() {
-    //stage.setScene(FarmReportPage.getScene());
+    // stage.setScene(FarmReportPage.getScene());
     stage.show();
   }
 
   public static void goToMonthlyReportScene() {
-    //stage.setScene(MonthlyReportPage.getScene());
+    // stage.setScene(MonthlyReportPage.getScene());
     stage.show();
   }
 
   public static void goToDateRangeReportScene() {
-    //stage.setScene(DateRangeReport.getScene());
+    // stage.setScene(DateRangeReport.getScene());
     stage.show();
   }
 
@@ -86,7 +86,7 @@ public class Main extends Application {
   public static void back() {
     sceneStack.pop();
     stage.setScene(sceneStack.peek());
-    
+
   }
 
   public static void exit() {
