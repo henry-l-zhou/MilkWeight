@@ -38,7 +38,7 @@ public class AddDataPage {
 		titleLabel.setMinSize(300, 30);
 		root.setTop(titleLabel);
 
-		// set up left side
+		// set up left pane (Displays what's going to be added and an add by file button) 
 		Label displayInfo = new Label("Data:\n" + "Farm ID:\n" + "Milk Weight:");
 		displayInfo.setMinSize(100, 150);
 		displayInfo.setStyle("-fx-border-color: #000000");
@@ -58,7 +58,7 @@ public class AddDataPage {
 		vBox.setSpacing(10);
 		root.setLeft(vBox);
 
-		// set up right side
+		// set up right pane (Textfields & Add button)
 		TextField date = new TextField();
 		date.setPromptText("Date");
 		date.setAlignment(Pos.CENTER);
@@ -71,10 +71,10 @@ public class AddDataPage {
 		milkWeight.setPromptText("Milk Weight");
 		milkWeight.setAlignment(Pos.CENTER);
 
-		TextField addData = new TextField();
-		addData.setPromptText("Add Data");
+		Button addData = new Button("Add Data");
 		addData.setAlignment(Pos.CENTER);
-
+		addData.setMaxWidth(Double.MAX_VALUE);
+		
 		VBox vBox2 = new VBox();
 		vBox2.getChildren().addAll(date, farmID, milkWeight, addData);
 		vBox2.setPadding(new Insets(50, 0, 0, 0));
