@@ -104,7 +104,7 @@ public class AddDataPage {
 		});
 
 		hBox.getChildren().addAll(backButton, homeButton);
-		hBox.setSpacing(260.0);
+		hBox.setSpacing(250.0);
 		root.setBottom(hBox);
 
 		// make font size all the same

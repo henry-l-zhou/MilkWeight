@@ -66,7 +66,7 @@ public class AnnualReportPage {
 		});
 
 		hBox.getChildren().addAll(year, displayData);
-		hBox.setPadding(new Insets(14, 0, 0, 14));
+		hBox.setPadding(new Insets(20, 0, 0, 20));
 		hBox.setSpacing(80.0);
 		root.add(hBox, 0, 1);
 
