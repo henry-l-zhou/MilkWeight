@@ -37,6 +37,17 @@ public class Main extends Application {
     stage.setScene(AddDataPage.getScene());
     stage.show();
   }
+  
+  public static void goToRemoveDataScene() {
+	    //stage.setScene(RemoveDataPage.getScene());
+	    stage.show();
+  }
+  
+  //this goes to the scene after the edit button is clicked on the edit data page
+  public static void goToEditScene() {
+	    //stage.setScene(EditPage.getScene());
+	    stage.show();
+  }
 
   public static void goToFarmReportScene() {
     //stage.setScene(FarmReportPage.getScene());

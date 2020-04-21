@@ -30,7 +30,7 @@ public class MainPageScene {
         //Display Button setup
         Button displayDataButton = new Button("Display Data");
         displayDataButton.setMinSize(180, 120);
-        displayDataButton.setStyle("-fx-background-color: #ffcccc; -fx-border-color: #000000");
+        displayDataButton.setStyle("-fx-background-color: #b3ff99; -fx-border-color: #000000");
         displayDataButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -41,11 +41,11 @@ public class MainPageScene {
         //Edit Button setup
         Button editDataButton = new Button("Edit Data");
         editDataButton.setMinSize(180, 120);
-        editDataButton.setStyle("-fx-background-color: #b3ff99; -fx-border-color: #000000");
+        editDataButton.setStyle("-fx-background-color: #ffcccc; -fx-border-color: #000000");
         editDataButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				Main.goToAddDataScene();
+				Main.goToEditDataScene();
 			}
         });
         
