@@ -89,7 +89,7 @@ public class AddDataPage {
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				// go to add by file input class
+			  Main.back();
 			}
 		});
 

@@ -52,7 +52,12 @@ public class MainPageScene {
         //Exit Button setup
         Button exitButton = new Button("Exit");
         exitButton.setStyle("-fx-background-color: #f8f8ff; -fx-border-color: #000000");
-        
+        exitButton.setOnAction(new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent arg0) {
+            Main.exit();
+          }
+        });
         //Title Label setup
         Label titleLabel = new Label("Milk Weight Organizer");
         titleLabel.setAlignment(Pos.CENTER);

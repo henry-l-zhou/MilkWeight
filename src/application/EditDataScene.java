@@ -83,7 +83,7 @@ public class EditDataScene {
 		    backButton.setOnAction(new EventHandler<ActionEvent>() {
 		      @Override
 		      public void handle(ActionEvent arg0) {
-		        // go to home
+		        Main.back();
 		      }
 		    });
 
