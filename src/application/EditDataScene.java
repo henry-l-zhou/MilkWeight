@@ -91,7 +91,7 @@ public class EditDataScene {
 		    HBox hbox = new HBox();
 		    hbox.setSpacing(50);
 		    root.setTop(titleLabel);
-		    hbox.setPadding(new Insets(65, 0, 65, 0));
+		    hbox.setPadding(new Insets(100, 0, 50, 0));
 		    hbox.getChildren().add(addButton);
 		    hbox.getChildren().add(editButton);
 		    hbox.getChildren().add(removeButton);
