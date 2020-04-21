@@ -36,7 +36,7 @@ public class Main extends Application {
     stage.setScene(EditDataScene.getScene());
     sceneStack.push(EditDataScene.getScene());
     stage.show();
-    System.out.println(sceneStack);
+   
   }
 
   public static void goToDisplayDataScene() {
