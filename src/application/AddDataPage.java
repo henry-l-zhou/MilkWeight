@@ -71,9 +71,9 @@ public class AddDataPage {
     milkWeight.setPromptText("Milk Weight");
     milkWeight.setAlignment(Pos.CENTER);
 
-    Button addData = new Button("Add Data");
+    TextField addData = new TextField();
+    addData.setPromptText("Add Data");
     addData.setAlignment(Pos.CENTER);
-    addData.setMaxWidth(Double.MAX_VALUE);
 
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, addData);
