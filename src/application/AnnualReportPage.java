@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -23,15 +24,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class AnnualReportPage {
+public class AnnualReportPage extends Application{
   public static final String APP_TITLE = "Annual Report";
   private final static ObservableList<MilkWeight> data =
       FXCollections.observableArrayList(new MilkWeight("2018", "Farm 1", "5451"),
           new MilkWeight("2018", "Farm 2", "8754"), new MilkWeight("2019", "Farm 1", "84125"),
           new MilkWeight("2019", "Farm 3", "9874"), new MilkWeight("2019", "Farm 4", "74106"));
 
-  public static Scene getScene() {
+  public void start(Stage primaryStage) {
 
     // GridPane setup
     GridPane root = new GridPane();
@@ -105,7 +107,7 @@ public class AnnualReportPage {
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.back();
+        //tbd
       }
     });
 
@@ -115,7 +117,8 @@ public class AnnualReportPage {
     homeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToMainPageScene();
+        Main main = new Main();
+        main.start(primaryStage);
       }
     });
 
@@ -128,6 +131,7 @@ public class AnnualReportPage {
     root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
 
     Scene scene = new Scene(root, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-    return scene;
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 }

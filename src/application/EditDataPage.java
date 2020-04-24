@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -17,9 +18,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class DisplayDataScene {
-  public static Scene getScene() {
+public class EditDataPage extends Application{
+  public void start(Stage primaryStage) {
     BorderPane root = new BorderPane();
     Button backButton = new Button("Back");
     root.setPadding(new Insets(20, 70, 20, 70));
@@ -28,52 +30,42 @@ public class DisplayDataScene {
     root.setBackground(new Background(bgfill));
 
     // set up title
-    Label titleLabel = new Label("Display Data");
-    titleLabel.setStyle("-fx-background-color: #b3ff99; -fx-border-color: #000000");
+    Label titleLabel = new Label("Edit Data");
+    titleLabel.setStyle("-fx-background-color: #ffcccc; -fx-border-color: #000000");
     titleLabel.setAlignment(Pos.CENTER);
     titleLabel.setMinSize(460, 30);
 
-    // Farm Report Button setup
-    Button farmReportButton = new Button("Farm Report");
-    farmReportButton.setMinSize(180, 120);
-    farmReportButton.setStyle("-fx-background-color: #c679ec; -fx-border-color: #000000");
-    farmReportButton.setOnAction(new EventHandler<ActionEvent>() {
+    // Add Button setup
+    Button addButton = new Button("Add");
+    addButton.setMinSize(120, 100);
+    addButton.setStyle("-fx-background-color: #87CEEB; -fx-border-color: #000000");
+    addButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToFarmReportScene();
+        AddDataPage adp = new AddDataPage();
+        adp.start(primaryStage);
       }
     });
 
-    // Annual Report Button setup
-    Button annualReportButton = new Button("Annual Report");
-    annualReportButton.setMinSize(180, 120);
-    annualReportButton.setStyle("-fx-background-color: #87CEEB; -fx-border-color: #000000");
-    annualReportButton.setOnAction(new EventHandler<ActionEvent>() {
+    // Edit Report Button setup
+    Button editButton = new Button("Edit");
+    editButton.setMinSize(120, 100);
+    editButton.setStyle("-fx-background-color: #ffcc99; -fx-border-color: #000000");
+    editButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToAnnualReportScene();
+        //to be added
       }
     });
 
-    // Date Range Report Button setup
-    Button dateRangeReportButton = new Button("Date Range Report");
-    dateRangeReportButton.setMinSize(180, 120);
-    dateRangeReportButton.setStyle("-fx-background-color: #fbfbd0; -fx-border-color: #000000");
-    dateRangeReportButton.setOnAction(new EventHandler<ActionEvent>() {
+    // Remove Report Button setup
+    Button removeButton = new Button("Remove");
+    removeButton.setMinSize(120, 100);
+    removeButton.setStyle("-fx-background-color: #ccccff; -fx-border-color: #000000");
+    removeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToDateRangeReportScene();
-      }
-    });
-
-    // Monthly Report Button setup
-    Button monthlyReportButton = new Button("Monthly Report");
-    monthlyReportButton.setMinSize(180, 120);
-    monthlyReportButton.setStyle("-fx-background-color: #ff6666; -fx-border-color: #000000");
-    monthlyReportButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        Main.goToMonthlyReportScene();
+        //to be added
       }
     });
 
@@ -84,7 +76,8 @@ public class DisplayDataScene {
     homeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToMainPageScene();
+        Main main = new Main();
+        main.start(primaryStage);
       }
     });
 
@@ -94,31 +87,32 @@ public class DisplayDataScene {
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.back();
+        //tbd
       }
     });
 
     // Set up Root
-    GridPane center = new GridPane();
-    center.setHgap(50);
-    center.setVgap(10);
+    HBox hbox = new HBox();
+    hbox.setSpacing(50);
     root.setTop(titleLabel);
-    center.setPadding(new Insets(20, 20, 20, 20));
-    center.add(farmReportButton, 0, 0);
-    center.add(annualReportButton, 1, 0);
-    center.add(monthlyReportButton, 0, 1);
-    center.add(dateRangeReportButton, 1, 1);
+    hbox.setPadding(new Insets(100, 0, 50, 0));
+    hbox.getChildren().add(addButton);
+    hbox.getChildren().add(editButton);
+    hbox.getChildren().add(removeButton);
 
     GridPane bottom = new GridPane();
     bottom.add(backButton, 0, 0);
     bottom.add(homeButton, 1, 0);
     bottom.setHgap(250);
+
+
     root.setBottom(bottom);
-    root.setCenter(center);
+    root.setCenter(hbox);
     DoubleProperty fontSize = new SimpleDoubleProperty(13); // font size in pt
     root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
 
     Scene scene = new Scene(root, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-    return scene;
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 }

@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -18,11 +19,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class AddDataPage {
+public class AddDataPage extends Application{
   public static final String APP_TITLE = "Add Data";
 
-  public static Scene getScene() {
+  public void start(Stage primaryStage) {
 
     // BorderPane setup
     BorderPane root = new BorderPane();
@@ -89,7 +91,7 @@ public class AddDataPage {
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.back();
+        //tbd
       }
     });
 
@@ -99,7 +101,8 @@ public class AddDataPage {
     homeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        Main.goToMainPageScene();
+        Main main = new Main();
+        main.start(primaryStage);
       }
     });
 
@@ -112,6 +115,7 @@ public class AddDataPage {
     root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
 
     Scene scene = new Scene(root, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-    return scene;
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 }
