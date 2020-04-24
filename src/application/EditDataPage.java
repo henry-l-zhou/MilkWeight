@@ -44,6 +44,7 @@ public class EditDataPage extends Application{
       public void handle(ActionEvent arg0) {
         AddDataPage adp = new AddDataPage();
         adp.start(primaryStage);
+        Main.addHistory(adp);
       }
     });
 
@@ -78,6 +79,7 @@ public class EditDataPage extends Application{
       public void handle(ActionEvent arg0) {
         Main main = new Main();
         main.start(primaryStage);
+        Main.addHistory(main);
       }
     });
 
@@ -87,7 +89,11 @@ public class EditDataPage extends Application{
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //tbd
+        try {
+          Main.lastUsedStage().start(primaryStage);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     });
 

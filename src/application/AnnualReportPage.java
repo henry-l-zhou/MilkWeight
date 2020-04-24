@@ -107,7 +107,11 @@ public class AnnualReportPage extends Application{
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //tbd
+        try {
+          Main.lastUsedStage().start(primaryStage);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     });
 
@@ -119,6 +123,7 @@ public class AnnualReportPage extends Application{
       public void handle(ActionEvent arg0) {
         Main main = new Main();
         main.start(primaryStage);
+        Main.addHistory(main);
       }
     });
 

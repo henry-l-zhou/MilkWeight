@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AddDataPage extends Application{
+public class AddDataPage extends Application {
   public static final String APP_TITLE = "Add Data";
 
   public void start(Stage primaryStage) {
@@ -91,7 +91,11 @@ public class AddDataPage extends Application{
     backButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //tbd
+        try {
+          Main.lastUsedStage().start(primaryStage);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     });
 
@@ -103,6 +107,7 @@ public class AddDataPage extends Application{
       public void handle(ActionEvent arg0) {
         Main main = new Main();
         main.start(primaryStage);
+        Main.addHistory(main);
       }
     });
 
