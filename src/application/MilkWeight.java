@@ -1,41 +1,44 @@
 package application;
 
-import javafx.beans.property.SimpleStringProperty;
-
+/**
+ * This class represents a single Milk Weight Item with a
+ * @author Joonbo Shim
+ *
+ */
 public class MilkWeight {
   // prototype class to display data to the table
-  private final SimpleStringProperty year;
-  private final SimpleStringProperty farmId;
-  private final SimpleStringProperty weight;
+  private String date;
+  private String farmId;
+  private String weight;
 
-  MilkWeight(String year, String farmId, String weight) {
-    this.year = new SimpleStringProperty(year);
-    this.farmId = new SimpleStringProperty(farmId);
-    this.weight = new SimpleStringProperty(weight);
+  MilkWeight(String date, String farmId, String weight) {
+    this.date = date;
+    this.farmId = farmId;
+    this.weight = weight;
   }
 
-  public String getYear() {
-    return year.get();
+  public String getDate() {
+    return date;
   }
 
-  public void setYear(String year) {
-    this.year.set(year);
+  public void setYear(String date) {
+    this.date = date;
   }
 
   public String getFarmId() {
-    return farmId.get();
+    return farmId;
   }
 
   public void setFarmId(String farmId) {
-    this.farmId.set(farmId);
+    this.farmId = farmId;
   }
 
   public String getWeight() {
-    return weight.get();
+    return weight;
   }
 
-  public void setEmail(String weight) {
-    this.weight.set(weight);
+  public void setWeight(String weight) {
+    this.weight = weight;
   }
 
 }
