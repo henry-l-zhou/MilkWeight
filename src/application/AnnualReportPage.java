@@ -29,9 +29,9 @@ import javafx.stage.Stage;
 public class AnnualReportPage extends Application{
   public static final String APP_TITLE = "Annual Report";
   private final static ObservableList<MilkWeight> data =
-      FXCollections.observableArrayList(new MilkWeight("2018", "Farm 1", "5451"),
-          new MilkWeight("2018", "Farm 2", "8754"), new MilkWeight("2019", "Farm 1", "84125"),
-          new MilkWeight("2019", "Farm 3", "9874"), new MilkWeight("2019", "Farm 4", "74106"));
+      FXCollections.observableArrayList(new MilkWeight(2018, 1, 1, "Farm 1", "5451"),
+          new MilkWeight(2018, 1, 1,  "Farm 2", "8754"), new MilkWeight(2019, 1, 1,  "Farm 1", "84125"),
+          new MilkWeight(2019, 1, 1,  "Farm 3", "9874"), new MilkWeight(2019, 1, 1,  "Farm 4", "74106"));
 
   public void start(Stage primaryStage) {
 
