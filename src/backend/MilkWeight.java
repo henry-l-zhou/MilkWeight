@@ -68,16 +68,29 @@ public class MilkWeight implements Comparable<MilkWeight>{
 	
 	@Override
 	public int compareTo(MilkWeight o) {
-		MilkWeight mw = (MilkWeight) o;
-		int yearDiff = this.getYear() - mw.getYear();
-		int monthDiff = this.getMonth() - mw.getMonth();
-		int dateDiff = this.getDate() - mw.getDate();
+		int yearDiff = this.getYear() - o.getYear();
+		int monthDiff = this.getMonth() - o.getMonth();
+		int dateDiff = this.getDate() - o.getDate();
+		int farmDiff = this.getFarmId().compareTo(o.getFarmId());
+		int weightDiff = this.getWeight() - o.getWeight();
 		if(yearDiff != 0) {
 			return yearDiff;
 		}
 		else {
-			if(monthDiff != 0) return monthDiff;
-			else return (dateDiff != 0) ? dateDiff : 0;
+			if(monthDiff != 0) {
+				return monthDiff;
+			}
+			else {
+				if(dateDiff != 0) {
+					return dateDiff;
+				}
+				else {
+					if(farmDiff != 0) {
+						return farmDiff;
+					}
+					else return (weightDiff != 0) ? weightDiff : 0;
+				}
+			}
 		}
 	}
 
