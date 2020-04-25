@@ -77,7 +77,7 @@ public class AnnualReportPage extends Application{
 
     TableColumn yearCol = new TableColumn("Year");
     yearCol.setMinWidth(100);
-    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("year"));
+    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("date"));
     yearCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn farmCol = new TableColumn("Farm ID");
