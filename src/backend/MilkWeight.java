@@ -12,9 +12,9 @@ public class MilkWeight implements Comparable{
 	private int month;
 	private int year;
 	private String farmId;
-	private String weight;
+	private int weight;
 
-	public MilkWeight(int year, int month, int date, String farmId, String weight) {
+	public MilkWeight(int year, int month, int date, String farmId, int weight) {
 		this.date = date;
 		this.year = year;
 		this.month = month;
@@ -54,14 +54,18 @@ public class MilkWeight implements Comparable{
 		this.farmId = farmId;
 	}
 
-	public String getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 
-	public void setWeight(String weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
+	public String toString() {
+	  return this.farmId + "," + this.year + "-" + this.month + "-" + this.date + "," + this.weight;
+	}
+	
 	@Override
 	public int compareTo(Object o) {
 		MilkWeight mw = (MilkWeight) o;
