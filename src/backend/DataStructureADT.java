@@ -1,7 +1,6 @@
 package backend;
 
 import java.util.List;
-import application.MilkWeight;
 
 public interface DataStructureADT {
   /**

@@ -1,4 +1,4 @@
-package application;
+package backend;
 
 /**
  * This class represents a single Milk Weight Item with a
@@ -14,7 +14,7 @@ public class MilkWeight implements Comparable{
 	private String farmId;
 	private String weight;
 
-	MilkWeight(int year, int month, int date, String farmId, String weight) {
+	public MilkWeight(int year, int month, int date, String farmId, String weight) {
 		this.date = date;
 		this.year = year;
 		this.month = month;
