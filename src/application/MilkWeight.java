@@ -6,7 +6,7 @@ package application;
  * @author Joonbo Shim
  *
  */
-public class MilkWeight {
+public class MilkWeight implements Comparable{
 	// prototype class to display data to the table
 	private int date;
 	private int month;
@@ -60,6 +60,21 @@ public class MilkWeight {
 
 	public void setWeight(String weight) {
 		this.weight = weight;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		MilkWeight mw = (MilkWeight) o;
+		int yearDiff = this.getYear() - mw.getYear();
+		int monthDiff = this.getMonth() - mw.getMonth();
+		int dateDiff = this.getDate() - mw.getDate();
+		if(yearDiff != 0) {
+			return yearDiff;
+		}
+		else {
+			if(monthDiff != 0) return monthDiff;
+			else return (dateDiff != 0) ? dateDiff : 0;
+		}
 	}
 
 }
