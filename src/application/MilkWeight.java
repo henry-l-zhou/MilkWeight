@@ -2,43 +2,64 @@ package application;
 
 /**
  * This class represents a single Milk Weight Item with a
+ * 
  * @author Joonbo Shim
  *
  */
 public class MilkWeight {
-  // prototype class to display data to the table
-  private String date;
-  private String farmId;
-  private String weight;
+	// prototype class to display data to the table
+	private int date;
+	private int month;
+	private int year;
+	private String farmId;
+	private String weight;
 
-  MilkWeight(String date, String farmId, String weight) {
-    this.date = date;
-    this.farmId = farmId;
-    this.weight = weight;
-  }
+	MilkWeight(int year, int month, int date, String farmId, String weight) {
+		this.date = date;
+		this.year = year;
+		this.month = month;
+		this.farmId = farmId;
+		this.weight = weight;
+	}
 
-  public String getDate() {
-    return date;
-  }
+	public int getDate() {
+		return date;
+	}
 
-  public void setYear(String date) {
-    this.date = date;
-  }
+	public void setDate(int date) {
+		this.date = date;
+	}
+	
+	public int getMonth() {
+		return month;
+	}
 
-  public String getFarmId() {
-    return farmId;
-  }
+	public void setMonth(int month) {
+		this.month = month;
+	}
+	
+	public int getYear() {
+		return year;
+	}
 
-  public void setFarmId(String farmId) {
-    this.farmId = farmId;
-  }
+	public void setYear(int year) {
+		this.year = year;
+	}
 
-  public String getWeight() {
-    return weight;
-  }
+	public String getFarmId() {
+		return farmId;
+	}
 
-  public void setWeight(String weight) {
-    this.weight = weight;
-  }
+	public void setFarmId(String farmId) {
+		this.farmId = farmId;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
 
 }
