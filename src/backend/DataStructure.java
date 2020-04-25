@@ -11,22 +11,22 @@ public class DataStructure implements DataStructureADT {
   private Map<String, List<MilkWeight>> mwMap;
   
   public DataStructure() {
-    mwList = new ArrayList<MilkWeight>();
-    mwMap = new HashMap<String, List<MilkWeight>>();
-    mwList.add(new MilkWeight(1999, 1, 10, "Farm 0", 69));
-    mwList.add(new MilkWeight(2000, 1, 10, "Farm 1", 69));
-    mwList.add(new MilkWeight(2000, 2, 11, "Farm 2", 69));
-    mwList.add(new MilkWeight(1949, 1, 10, "Farm 3", 69));
-    mwList.add(new MilkWeight(1599, 1, 10, "Farm 0", 69));
-    mwList.add(new MilkWeight(2000, 3, 11, "Farm 5", 69));
-    Collections.sort(mwList);
+//    mwList = new ArrayList<MilkWeight>();
+//    mwMap = new HashMap<String, List<MilkWeight>>();
+//    mwList.add(new MilkWeight(1999, 1, 10, "Farm 0", 69));
+//    mwList.add(new MilkWeight(2000, 1, 10, "Farm 1", 69));
+//    mwList.add(new MilkWeight(2000, 2, 11, "Farm 2", 69));
+//    mwList.add(new MilkWeight(1949, 1, 10, "Farm 3", 69));
+//    mwList.add(new MilkWeight(1599, 1, 10, "Farm 0", 69));
+//    mwList.add(new MilkWeight(2000, 3, 11, "Farm 5", 69));
+//    Collections.sort(mwList);
     
   }
 
   @Override
   public void insert(MilkWeight mw) {
-    
-
+//    Collections.binarySearch(mwList, mw);
+//    mwList.insert()
   }
 
   @Override
@@ -79,8 +79,8 @@ public class DataStructure implements DataStructureADT {
 
   public static void main(String[] args) {
     DataStructure ds = new DataStructure();
-    System.out.println(ds.mwList);
-    System.out.println(Collections.binarySearch(ds.mwList, new MilkWeight(1699, 3, 11, "Farm 5", 69)));
+//    System.out.println(ds.mwList);
+//    System.out.println(Collections.binarySearch(ds.mwList, new MilkWeight(1699, 3, 11, "Farm 5", 69)));
     
   }
 }
