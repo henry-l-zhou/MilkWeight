@@ -80,7 +80,7 @@ public class DataStructure implements DataStructureADT {
   public static void main(String[] args) {
     DataStructure ds = new DataStructure();
     System.out.println(ds.mwList);
-    //System.out.println(Collections.bin);
+    System.out.println(Collections.binarySearch(ds.mwList, new MilkWeight(1699, 3, 11, "Farm 5", 69)));
     
   }
 }

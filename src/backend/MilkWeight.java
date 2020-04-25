@@ -6,7 +6,7 @@ package backend;
  * @author Joonbo Shim
  *
  */
-public class MilkWeight implements Comparable{
+public class MilkWeight implements Comparable<MilkWeight>{
 	// prototype class to display data to the table
 	private int date;
 	private int month;
@@ -67,7 +67,7 @@ public class MilkWeight implements Comparable{
 	}
 	
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(MilkWeight o) {
 		MilkWeight mw = (MilkWeight) o;
 		int yearDiff = this.getYear() - mw.getYear();
 		int monthDiff = this.getMonth() - mw.getMonth();
