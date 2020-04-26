@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AddDataPage extends Application {
+public class AddData extends Application {
   public static final String APP_TITLE = "Add Data";
 
   public void start(Stage primaryStage) {
@@ -73,9 +73,15 @@ public class AddDataPage extends Application {
     milkWeight.setPromptText("Milk Weight");
     milkWeight.setAlignment(Pos.CENTER);
 
-    TextField addData = new TextField();
-    addData.setPromptText("Add Data");
+    Button addData = new Button("Add Data");
+    addData.setMaxWidth(Double.MAX_VALUE);
     addData.setAlignment(Pos.CENTER);
+    addData.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent arg0) {
+          // adds manually-entered data
+        }
+      });
 
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, addData);

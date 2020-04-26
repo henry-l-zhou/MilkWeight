@@ -43,7 +43,9 @@ public class DisplayDataPage extends Application{
     farmReportButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //to be added
+    	  FarmReport frp = new FarmReport();
+          frp.start(primaryStage);
+          Main.addHistory(frp);
       }
     });
 
@@ -54,9 +56,21 @@ public class DisplayDataPage extends Application{
     annualReportButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        AnnualReportPage arp = new AnnualReportPage();
+        AnnualReport arp = new AnnualReport();
         arp.start(primaryStage);
         Main.addHistory(arp);
+      }
+    });
+    // Monthly Report Button setup
+    Button monthlyReportButton = new Button("Monthly Report");
+    monthlyReportButton.setMinSize(180, 120);
+    monthlyReportButton.setStyle("-fx-background-color: #ff6666; -fx-border-color: #000000");
+    monthlyReportButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent arg0) {
+    	  MonthlyReport mrp = new MonthlyReport();
+    	  mrp.start(primaryStage);
+    	  Main.addHistory(mrp);
       }
     });
 
@@ -67,20 +81,12 @@ public class DisplayDataPage extends Application{
     dateRangeReportButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //to be added
+    	  DateRangeReport drrp = new DateRangeReport();
+    	  drrp.start(primaryStage);
+    	  Main.addHistory(drrp);
       }
     });
 
-    // Monthly Report Button setup
-    Button monthlyReportButton = new Button("Monthly Report");
-    monthlyReportButton.setMinSize(180, 120);
-    monthlyReportButton.setStyle("-fx-background-color: #ff6666; -fx-border-color: #000000");
-    monthlyReportButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        //to be added
-      }
-    });
 
     // Home Button setup
     Button homeButton = new Button("Home");

@@ -27,7 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AnnualReportPage extends Application{
+public class AnnualReport extends Application{
   public static final String APP_TITLE = "Annual Report";
   private final static ObservableList<MilkWeight> data =
       FXCollections.observableArrayList(new MilkWeight(2018, 1, 1, "Farm 1", 5451),
@@ -55,10 +55,11 @@ public class AnnualReportPage extends Application{
     TextField year = new TextField();
     year.setPromptText("Enter Year");
     year.setAlignment(Pos.CENTER);
+    year.setMaxWidth(150);
 
     // set up Display Data
     Button displayData = new Button("Display Data");
-    displayData.setMinSize(80, 30);
+    displayData.setMaxWidth(Double.MAX_VALUE);
     displayData.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
@@ -67,8 +68,8 @@ public class AnnualReportPage extends Application{
     });
 
     hBox.getChildren().addAll(year, displayData);
-    hBox.setPadding(new Insets(20, 0, 0, 20));
-    hBox.setSpacing(80.0);
+    hBox.setPadding(new Insets(20, 0, 0, 0));
+    hBox.setSpacing(190.0);
     root.add(hBox, 0, 1);
 
     // set up Table of Data

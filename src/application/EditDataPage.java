@@ -42,7 +42,7 @@ public class EditDataPage extends Application{
     addButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        AddDataPage adp = new AddDataPage();
+        AddData adp = new AddData();
         adp.start(primaryStage);
         Main.addHistory(adp);
       }
@@ -55,7 +55,9 @@ public class EditDataPage extends Application{
     editButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //to be added
+        EditData edp = new EditData();
+        edp.start(primaryStage);
+        Main.addHistory(edp);
       }
     });
 
@@ -66,7 +68,9 @@ public class EditDataPage extends Application{
     removeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        //to be added
+        RemoveData rdp = new RemoveData();
+        rdp.start(primaryStage);
+        Main.addHistory(rdp);
       }
     });
 
