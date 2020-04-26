@@ -1,5 +1,6 @@
 package application;
 
+import backend.MilkWeight;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -11,7 +12,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -40,14 +44,27 @@ public class AddData extends Application {
     titleLabel.setMinSize(300, 30);
     root.setTop(titleLabel);
 
-    // set up left pane (Displays what's going to be added and an add by file button)
-    Label displayInfo = new Label("Data:\n" + "Farm ID:\n" + "Milk Weight:");
-    displayInfo.setMinSize(100, 150);
-    displayInfo.setStyle("-fx-border-color: #000000");
-    displayInfo.setPadding(new Insets(0, 20, 0, 20));
-
+    // set up left pane (Gives user the option to view the data if desired)
+    Label clickText = new Label("If you wish to view\n" +"data, please click the\n" + "button below");
+    clickText.setAlignment(Pos.CENTER);
+    Button displayButton = new Button("Display Data");
+    displayButton.setAlignment(Pos.CENTER);
+    displayButton.setMaxWidth(Double.MAX_VALUE);
+    displayButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent arg0) {
+          try {
+        	  DisplayDataPage ddp = new DisplayDataPage();
+              ddp.start(primaryStage);
+              Main.addHistory(ddp);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      });
+    
     Button fileInput = new Button("Add By File Input");
-    fileInput.setMinSize(100, 20);
+    fileInput.setMaxWidth(Double.MAX_VALUE);
     fileInput.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
@@ -55,9 +72,9 @@ public class AddData extends Application {
       }
     });
     VBox vBox = new VBox();
-    vBox.getChildren().addAll(displayInfo, fileInput);
-    vBox.setPadding(new Insets(50, 0, 0, 0));
-    vBox.setSpacing(10);
+    vBox.getChildren().addAll(clickText, displayButton, fileInput);
+    vBox.setPadding(new Insets(35, 0, 0, 0));
+    vBox.setSpacing(15);
     root.setLeft(vBox);
 
     // set up right pane (Textfields & Add button)
@@ -85,7 +102,7 @@ public class AddData extends Application {
 
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, addData);
-    vBox2.setPadding(new Insets(50, 0, 0, 0));
+    vBox2.setPadding(new Insets(20, 0, 0, 0));
     vBox2.setSpacing(15.0);
     root.setRight(vBox2);
 

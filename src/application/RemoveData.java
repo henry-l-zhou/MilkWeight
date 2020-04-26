@@ -41,15 +41,28 @@ public class RemoveData extends Application {
     root.setTop(titleLabel);
 
     // set up left pane (Displays what's going to be added and an add by file button)
-    Label displayInfo = new Label("Data:\n" + "Farm ID:\n" + "Milk Weight:");
-    displayInfo.setMinSize(100, 150);
-    displayInfo.setStyle("-fx-border-color: #000000");
-    displayInfo.setPadding(new Insets(0, 20, 0, 20));
+    Label clickText = new Label("If you wish to view\n" +"data, please click the\n" + "button below");
+    clickText.setAlignment(Pos.CENTER);
+    Button displayButton = new Button("Display Data");
+    displayButton.setAlignment(Pos.CENTER);
+    displayButton.setMaxWidth(Double.MAX_VALUE);
+    displayButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent arg0) {
+          try {
+        	  DisplayDataPage ddp = new DisplayDataPage();
+              ddp.start(primaryStage);
+              Main.addHistory(ddp);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      });
 
     VBox vBox = new VBox();
-    vBox.getChildren().addAll(displayInfo);
+    vBox.getChildren().addAll(clickText, displayButton);
     vBox.setPadding(new Insets(50, 0, 0, 0));
-    vBox.setSpacing(10);
+    vBox.setSpacing(83);
     root.setLeft(vBox);
 
     // set up right pane (Textfields & Add button)
