@@ -34,7 +34,7 @@ public class RemoveData extends Application {
 
     // set up title
     Label titleLabel = new Label(APP_TITLE);
-    titleLabel.setStyle("-fx-background-color: #87CEEB; -fx-border-color: #000000");
+    titleLabel.setStyle("-fx-background-color: #ccccff; -fx-border-color: #000000");
     titleLabel.setMaxWidth(Double.MAX_VALUE);
     titleLabel.setAlignment(Pos.CENTER);
     titleLabel.setMinSize(300, 30);
