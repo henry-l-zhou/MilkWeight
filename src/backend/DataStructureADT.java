@@ -17,20 +17,6 @@ public interface DataStructureADT {
   public boolean removeEntry(MilkWeight mw);
 
   /**
-   * If farmId is found remove all farms  associated with it
-   * @param farmId
-   * @return true if found farmId, false if not found
-   */
-  public boolean removeFarm(String farmId);
-
-  /**
-   * Returns true if the ID  is in the data  structure  
-   * @param farmId
-   * @return true if farmId i
-   */
-  public boolean contains(String farmId);
-
-  /**
    * Returns the number of  farms 
    * @return int # of farms
    */
