@@ -36,7 +36,7 @@ public class AddData extends Application {
     BackgroundFill bgfill = new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY);
     root.setBackground(new Background(bgfill));
 
-    // set up title
+    // title setup
     Label titleLabel = new Label(APP_TITLE);
     titleLabel.setStyle("-fx-background-color: #87CEEB; -fx-border-color: #000000");
     titleLabel.setMaxWidth(Double.MAX_VALUE);
@@ -44,33 +44,29 @@ public class AddData extends Application {
     titleLabel.setMinSize(300, 30);
     root.setTop(titleLabel);
 
-    // set up left pane (Gives user the option to view the data if desired)
-    Label clickText = new Label("If you wish to view\n" +"data, please click the\n" + "button below");
+    // leftpane setup (Gives user the option to view the data if desired)
+    Label clickText = new Label("If you wish to view\n" + "data, please click the\n" + "button below");
     clickText.setAlignment(Pos.CENTER);
     Button displayButton = new Button("Display Data");
     displayButton.setAlignment(Pos.CENTER);
     displayButton.setMaxWidth(Double.MAX_VALUE);
-    displayButton.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          try {
-        	  DisplayDataPage ddp = new DisplayDataPage();
-              ddp.start(primaryStage);
-              Main.addHistory(ddp);
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-        }
-      });
-    
-    Button fileInput = new Button("Add By File Input");
-    fileInput.setMaxWidth(Double.MAX_VALUE);
-    fileInput.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        // go to add by file input class
+    displayButton.setOnAction(e -> {
+      try {
+        DisplayDataPage ddp = new DisplayDataPage();
+        ddp.start(primaryStage);
+        Main.addHistory(ddp);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
     });
+
+    // file input setup
+    Button fileInput = new Button("Add By File Input");
+    fileInput.setMaxWidth(Double.MAX_VALUE);
+    fileInput.setOnAction(e -> {
+      // go to add by file input class
+    });
+
     VBox vBox = new VBox();
     vBox.getChildren().addAll(clickText, displayButton, fileInput);
     vBox.setPadding(new Insets(35, 0, 0, 0));
@@ -93,49 +89,39 @@ public class AddData extends Application {
     Button addData = new Button("Add Data");
     addData.setMaxWidth(Double.MAX_VALUE);
     addData.setAlignment(Pos.CENTER);
-    addData.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          // adds manually-entered data
-        }
-      });
+    addData.setOnAction(e -> {
+
+    });
 
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, addData);
     vBox2.setPadding(new Insets(20, 0, 0, 0));
-    vBox2.setSpacing(15.0);
+    vBox2.setSpacing(15);
     root.setRight(vBox2);
 
-    // set up bottom pane
-    HBox hBox = new HBox();
+    // set up back button
     Button backButton = new Button("Back");
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
     backButton.setMinSize(100, 35);
-    backButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        try {
-          Main.lastUsedStage().start(primaryStage);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    backButton.setOnAction(e -> {
+      try {
+        Main.lastUsedStage().start(primaryStage);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
     });
 
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 35);
-    homeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        Main main = new Main();
-        main.start(primaryStage);
-        Main.addHistory(main);
-      }
+    homeButton.setOnAction(e -> {
+      Main main = new Main();
+      main.start(primaryStage);
+      Main.addHistory(main);
     });
 
+    HBox hBox = new HBox(250);
     hBox.getChildren().addAll(backButton, homeButton);
-    hBox.setSpacing(250.0);
     root.setBottom(hBox);
 
     // make font size all the same

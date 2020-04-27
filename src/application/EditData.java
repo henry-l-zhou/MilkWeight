@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class EditData extends Application {
-  public static final String APP_TITLE = "Edit Data";
+  public static final String APP_TITLE = "Edit";
 
   public void start(Stage primaryStage) {
 
@@ -150,6 +150,7 @@ public class EditData extends Application {
 
     hBox.getChildren().addAll(backButton, homeButton);
     hBox.setSpacing(250.0);
+    hBox.setPadding(new Insets(0,0,0,20));
     root.setBottom(hBox);
 
     // make font size all the same

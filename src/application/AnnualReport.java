@@ -27,12 +27,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AnnualReport extends Application{
+public class AnnualReport extends Application {
   public static final String APP_TITLE = "Annual Report";
   private final static ObservableList<MilkWeight> data =
       FXCollections.observableArrayList(new MilkWeight(2018, 1, 1, "Farm 1", 5451),
-          new MilkWeight(2018, 1, 1,  "Farm 2", 8754), new MilkWeight(2019, 1, 1,  "Farm 1", 84125),
-          new MilkWeight(2019, 1, 1,  "Farm 3", 9874), new MilkWeight(2019, 1, 1,  "Farm 4", 74106));
+          new MilkWeight(2018, 1, 1, "Farm 2", 8754), new MilkWeight(2019, 1, 1, "Farm 1", 84125),
+          new MilkWeight(2019, 1, 1, "Farm 3", 9874), new MilkWeight(2019, 1, 1, "Farm 4", 74106));
 
   public void start(Stage primaryStage) {
 
@@ -51,7 +51,6 @@ public class AnnualReport extends Application{
     root.add(titleLabel, 0, 0);
 
     // set up Enter Year
-    HBox hBox = new HBox();
     TextField year = new TextField();
     year.setPromptText("Enter Year");
     year.setAlignment(Pos.CENTER);
@@ -67,9 +66,9 @@ public class AnnualReport extends Application{
       }
     });
 
+    HBox hBox = new HBox(190);
     hBox.getChildren().addAll(year, displayData);
     hBox.setPadding(new Insets(20, 0, 0, 0));
-    hBox.setSpacing(190.0);
     root.add(hBox, 0, 1);
 
     // set up Table of Data
@@ -95,8 +94,7 @@ public class AnnualReport extends Application{
     table.setItems(data);
     table.getColumns().addAll(yearCol, farmCol, weightCol);
 
-    VBox vBox = new VBox();
-    vBox.setSpacing(5);
+    VBox vBox = new VBox(5);
     vBox.setPadding(new Insets(10, 0, 10, 0));
     vBox.getChildren().addAll(table);
     root.add(vBox, 0, 2);
@@ -106,27 +104,21 @@ public class AnnualReport extends Application{
     Button backButton = new Button("Back");
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
     backButton.setMinSize(100, 40);
-    backButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        try {
-          Main.lastUsedStage().start(primaryStage);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    backButton.setOnAction(e -> {
+      try {
+        Main.lastUsedStage().start(primaryStage);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
     });
 
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 40);
-    homeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        Main main = new Main();
-        main.start(primaryStage);
-        Main.addHistory(main);
-      }
+    homeButton.setOnAction(e -> {
+      Main main = new Main();
+      main.start(primaryStage);
+      Main.addHistory(main);
     });
 
     hBox2.getChildren().addAll(backButton, homeButton);
