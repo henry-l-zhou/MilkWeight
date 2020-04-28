@@ -67,20 +67,20 @@ public class FarmReport extends Application {
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		table.setEditable(true);
 
-		TableColumn yearCol = new TableColumn("Month");
-		yearCol.setMinWidth(100);
-		yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmID"));
-		yearCol.setStyle("-fx-alignment: CENTER;");
+		TableColumn monthCol = new TableColumn("Month");
+		monthCol.setMinWidth(100);
+		monthCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmID"));
+		monthCol.setStyle("-fx-alignment: CENTER;");
 
-		TableColumn farmCol = new TableColumn("Total Weight");
-		farmCol.setMinWidth(100);
-		farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
-		farmCol.setStyle("-fx-alignment: CENTER;");
-
-		TableColumn weightCol = new TableColumn("%");
-		weightCol.setMinWidth(200);
-		weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
+		TableColumn weightCol = new TableColumn("Total Weight");
+		weightCol.setMinWidth(100);
+		weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
 		weightCol.setStyle("-fx-alignment: CENTER;");
+
+		TableColumn percentageCol = new TableColumn("%");
+		percentageCol.setMinWidth(200);
+		percentageCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
+		percentageCol.setStyle("-fx-alignment: CENTER;");
 
 		// set up Display Data
 		Button displayData = new Button("Display Data");
@@ -105,7 +105,7 @@ public class FarmReport extends Application {
 			}
 		});
 		table.setItems(data);
-		table.getColumns().addAll(yearCol, farmCol, weightCol);
+		table.getColumns().addAll(monthCol, weightCol, percentageCol);
 
 		// add buttons/textfields to the hBox
 		HBox hBox = new HBox();
