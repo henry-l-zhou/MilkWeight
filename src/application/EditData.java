@@ -1,5 +1,8 @@
 package application;
 
+import backend.FormatException;
+import backend.InputReader;
+import backend.MilkWeight;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -19,6 +22,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class EditData extends Application {
@@ -41,31 +45,31 @@ public class EditData extends Application {
     root.setTop(titleLabel);
 
     // set up left pane (Displays what's going to be added and an add by file button)
-    Label clickText = new Label("If you wish to view\n" +"data, please click the\n" + "button below");
+    Label clickText = new Label("If you wish to view\n" + "data, please click the\n" + "button below");
     clickText.setAlignment(Pos.CENTER);
     Button displayButton = new Button("Display Data");
     displayButton.setAlignment(Pos.CENTER);
     displayButton.setMaxSize(200, 30);
     displayButton.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          try {
-        	  DisplayDataPage ddp = new DisplayDataPage();
-              ddp.start(primaryStage);
-              Main.addHistory(ddp);
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
+      @Override
+      public void handle(ActionEvent arg0) {
+        try {
+          DisplayDataPage ddp = new DisplayDataPage();
+          ddp.start(primaryStage);
+          Main.addHistory(ddp);
+        } catch (Exception e) {
+          e.printStackTrace();
         }
-      });
+      }
+    });
 
     VBox vBox = new VBox();
     vBox.getChildren().addAll(clickText, displayButton);
     vBox.setPadding(new Insets(50, 0, 0, 0));
     vBox.setSpacing(86);
     root.setLeft(vBox);
-    
-    
+
+
     // set up center pane for columns that contain old data
     TextField oldDate = new TextField();
     oldDate.setPromptText("Old Date");
@@ -87,7 +91,7 @@ public class EditData extends Application {
     vBox2.setPadding(new Insets(50, 0, 0, 20));
     vBox2.setSpacing(15.0);
     root.setCenter(vBox2);
-    
+
     // set up right pane (Textfields & Add button)
     TextField newDate = new TextField();
     newDate.setPromptText("New Date");
@@ -107,12 +111,24 @@ public class EditData extends Application {
     Button editData = new Button("Edit Data");
     editData.setMaxWidth(Double.MAX_VALUE);
     editData.setAlignment(Pos.CENTER);
-    editData.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          // edits manually-entered data
+    editData.setOnAction(e-> {
+      InformationDialog info = new InformationDialog();
+      try {
+        MilkWeight oldMW = InputReader.parseLine(oldFarmID.getText(), oldDate.getText(), oldMilkWeight.getText());
+        MilkWeight newMW = InputReader.parseLine(newFarmID.getText(), newDate.getText(), NewMilkWeight.getText());
+        info.edit(primaryStage);
+        if (!Main.ds.contains(oldMW)) {
+          info.editError(primaryStage);
+        } else {
+          Main.ds.removeEntry(oldMW);
+          Main.ds.insert(newMW);
         }
-      });
+      } catch (FormatException ex1) {
+        info.editError(primaryStage);
+      } catch (Exception ex2) {
+        info.editError(primaryStage);
+      }
+    });
 
     VBox vBox3 = new VBox();
     vBox3.getChildren().addAll(newDate, newFarmID, NewMilkWeight, editData);
@@ -125,15 +141,14 @@ public class EditData extends Application {
     Button backButton = new Button("Back");
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
     backButton.setMinSize(100, 35);
-    backButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        try {
-          Main.lastUsedStage().start(primaryStage);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    backButton.setOnAction(e -> {
+
+      try {
+        Main.lastUsedStage().start(primaryStage);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
+
     });
 
     Button homeButton = new Button("Home");
@@ -150,7 +165,7 @@ public class EditData extends Application {
 
     hBox.getChildren().addAll(backButton, homeButton);
     hBox.setSpacing(250.0);
-    hBox.setPadding(new Insets(0,0,0,20));
+    hBox.setPadding(new Insets(0, 0, 0, 20));
     root.setBottom(hBox);
 
     // make font size all the same

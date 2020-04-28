@@ -70,6 +70,7 @@ public class AddData extends Application {
     Button fileInput = new Button("Add By File Input");
     fileInput.setMaxWidth(Double.MAX_VALUE);
     fileInput.setOnAction(e -> {
+      InformationDialog info = new InformationDialog();
       File inputFile = fc.showOpenDialog(primaryStage);
       try {
         InputReader ir = new InputReader(inputFile);
@@ -78,8 +79,9 @@ public class AddData extends Application {
         
         ir.getList().forEach(mw->Main.ds.insert(mw));
         Main.ds.getMilkWeightFarm("Farm 0", 2019);
+        info.inputFile(primaryStage, ir);
       } catch (NullPointerException ex) {
-        System.out.println("file not selected");
+        info.fileError(primaryStage);
       }
     });
 
@@ -106,12 +108,13 @@ public class AddData extends Application {
     addData.setMaxWidth(Double.MAX_VALUE);
     addData.setAlignment(Pos.CENTER);
     addData.setOnAction(e -> {
+      InformationDialog info = new InformationDialog();
       try {
         MilkWeight item = InputReader.parseLine(farmID.getText(), date.getText(), milkWeight.getText());
         Main.ds.insert(item);
-        //System.out.println(Main.ds.size());
+        info.add(primaryStage);
       } catch (Exception ex) {
-        System.out.println("Error in input");
+        info.editError(primaryStage);
       }
     });
 

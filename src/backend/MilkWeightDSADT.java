@@ -41,6 +41,8 @@ public interface MilkWeightDSADT {
   public List<MilkWeight> getMilkWeightDateRange(int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo,
       int yearTo);
 
+  public boolean contains(MilkWeight mw);
+  
   /**
    * 
    * @param date

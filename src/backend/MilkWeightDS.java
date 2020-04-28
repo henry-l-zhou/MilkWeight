@@ -60,6 +60,10 @@ public class MilkWeightDS implements MilkWeightDSADT {
   }
   
   @Override
+  public boolean contains(MilkWeight mw) {
+    return mwTreeMap.containsKey(mw);
+  }
+  @Override
   public List<MilkWeight> getMilkWeightDateRange(int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo,
       int yearTo) {
     ArrayList<MilkWeight> lst = new ArrayList<MilkWeight>();

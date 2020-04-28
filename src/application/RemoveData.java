@@ -1,5 +1,7 @@
 package application;
 
+import backend.InputReader;
+import backend.MilkWeight;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -41,23 +43,20 @@ public class RemoveData extends Application {
     root.setTop(titleLabel);
 
     // set up left pane (Displays what's going to be added and an add by file button)
-    Label clickText = new Label("If you wish to view\n" +"data, please click the\n" + "button below");
+    Label clickText = new Label("If you wish to view\n" + "data, please click the\n" + "button below");
     clickText.setAlignment(Pos.CENTER);
     Button displayButton = new Button("Display Data");
     displayButton.setAlignment(Pos.CENTER);
     displayButton.setMaxWidth(Double.MAX_VALUE);
-    displayButton.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          try {
-        	  DisplayDataPage ddp = new DisplayDataPage();
-              ddp.start(primaryStage);
-              Main.addHistory(ddp);
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-        }
-      });
+    displayButton.setOnAction(e -> {
+      try {
+        DisplayDataPage ddp = new DisplayDataPage();
+        ddp.start(primaryStage);
+        Main.addHistory(ddp);
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+    });
 
     VBox vBox = new VBox();
     vBox.getChildren().addAll(clickText, displayButton);
@@ -81,12 +80,19 @@ public class RemoveData extends Application {
     Button removeData = new Button("Remove Data");
     removeData.setMaxWidth(Double.MAX_VALUE);
     removeData.setAlignment(Pos.CENTER);
-    removeData.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent arg0) {
-          // removes manually-entered data
+    removeData.setOnAction(e -> {
+      InformationDialog info = new InformationDialog();
+      try {
+        MilkWeight mw = InputReader.parseLine(farmID.getText(), date.getText(), milkWeight.getText());
+        if (Main.ds.removeEntry(mw)) {
+          info.remove(primaryStage);
+        } else {
+          info.removeError(primaryStage);
         }
-      });
+      } catch (Exception ex) {
+        info.removeError(primaryStage);
+      }
+    });
 
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, removeData);
