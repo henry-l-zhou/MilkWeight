@@ -9,13 +9,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class processes a MilkWeightDS to get stats for a specific year
+ * @author Brian Hu
+ *
+ */
 public class AnnualReportProcessor {
 	private Map<String, Integer> weights;
 	private Map<String, Double> percents;
 	private int year;
 	private MilkWeightDS ds;
 	
-	
+	/**
+	 * Constructs an AnnualReportProcessor
+	 * @param ds - the MilkWeightDS to be processed
+	 * @param year - the desired year
+	 */
 	public AnnualReportProcessor(MilkWeightDS ds, int year) {
 		this.ds = ds;
 		this.year = year;
@@ -24,6 +33,9 @@ public class AnnualReportProcessor {
 		stats();
 	}
 	
+	/**
+	 * Processes the MilkWeightDS
+	 */
 	private void stats() {
 		List<MilkWeight> yearData = ds.getMilkWeightYear(year);
 		int sum = 0;
@@ -42,14 +54,26 @@ public class AnnualReportProcessor {
 		}
 	}
 	
+	/**
+	 * Gets the total weight for a specific farm ID
+	 * @param farmId - the farmID
+	 * @return the total weight in the year for that farm ID
+	 */
 	public int getWeight(String farmId) {
 		return weights.get(farmId);
 	}
-	
+	/**
+	 * Gets a farm ID's percent of the total weight in the year
+	 * @param farmId - the farm ID
+	 * @return the percent of the total weight for that farm ID in the year
+	 */
 	public double getPercent(String farmId) {
 		return percents.get(farmId);
 	}
 	
+	/**
+	 * Outputs the DateRangeReport as a CSV file
+	 */
 	public void toCSV() {
 		PrintWriter output = null;
 		try {

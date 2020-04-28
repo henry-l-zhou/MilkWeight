@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * This class processes a MilkWeightDS to get stats for a specific month and year
+ * @author Brian Hu
+ *
+ */
 public class MonthlyReportProcessor {
 	private Map<String, Integer> weights;
 	private Map<String, Double> percents;
@@ -16,7 +20,12 @@ public class MonthlyReportProcessor {
 	private int year;
 	private MilkWeightDS ds;
 	
-	
+	/**
+	 * Constructs a MonthlyReportProcessor
+	 * @param ds - the MilkWeightDS to be processed
+	 * @param month - the month
+	 * @param year - the year
+	 */
 	public MonthlyReportProcessor(MilkWeightDS ds, int month, int year) {
 		this.ds = ds;
 		this.month = month;
@@ -26,6 +35,9 @@ public class MonthlyReportProcessor {
 		stats();
 	}
 	
+	/**
+	 * Processes the MilkWeightDS
+	 */
 	private void stats() {
 		List<MilkWeight> monthData = ds.getMilkWeightMonth(month, year);
 		int sum = 0;
@@ -44,14 +56,27 @@ public class MonthlyReportProcessor {
 		}
 	}
 	
+	/**
+	 * Gets the total weight for a specific farm ID
+	 * @param farmId - the farmID
+	 * @return the total weight in that month and year for that farm ID
+	 */
 	public int getWeight(String farmId) {
 		return weights.get(farmId);
 	}
 	
+	/**
+	 * Gets a farm ID's percent of the total weight in that month and year
+	 * @param farmId - the farm ID
+	 * @return the percent of the total weight for that farm ID in that month and year
+	 */
 	public double getPercent(String farmId) {
 		return percents.get(farmId);
 	}
 	
+	/**
+	 * Outputs the DateRangeReport as a CSV file
+	 */
 	public void toCSV() {
 		PrintWriter output = null;
 		try {

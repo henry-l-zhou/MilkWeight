@@ -9,13 +9,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class processes a MilkWeightDS to get stats for a specific date range
+ * @author Brian Hu
+ *
+ */
 public class DateRangeReportProcessor {
 	private Map<String, Integer> weights;
 	private Map<String, Double> percents;
 	private int dateFrom, monthFrom, yearFrom, dateTo, monthTo, yearTo;
 	private MilkWeightDS ds;
 	
-	
+	/**
+	 * Constructs a DateRangeReportProcessor
+	 * @param ds - the data structure being processed
+	 * @param dateFrom - the start day
+	 * @param monthFrom - the start month
+	 * @param yearFrom - the start year
+	 * @param dateTo - the end day
+	 * @param monthTo - the end month
+	 * @param yearTo - the end year
+	 */
 	public DateRangeReportProcessor(MilkWeightDS ds, int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo, int yearTo) {
 		this.ds = ds;
 		this.dateFrom = dateFrom;
@@ -29,6 +43,9 @@ public class DateRangeReportProcessor {
 		stats();
 	}
 	
+	/**
+	 * Processes the MilkWeightDS
+	 */
 	private void stats() {
 		List<MilkWeight> rangeData = ds.getMilkWeightDateRange(dateFrom, monthFrom, yearFrom, dateTo, monthTo, yearTo);
 		int sum = 0;
@@ -47,14 +64,27 @@ public class DateRangeReportProcessor {
 		}
 	}
 	
+	/**
+	 * Gets the total weight for a specific farm ID
+	 * @param farmId - the farmID
+	 * @return the total weight in the range for that farm ID
+	 */
 	public int getWeight(String farmId) {
 		return weights.get(farmId);
 	}
 	
+	/**
+	 * Gets a farm ID's percent of the total weight in the range
+	 * @param farmId - the farm ID
+	 * @return the percent of the total weight for that farm ID in the range
+	 */
 	public double getPercent(String farmId) {
 		return percents.get(farmId);
 	}
 	
+	/**
+	 * Outputs the DateRangeReport as a CSV file
+	 */
 	public void toCSV() {
 		PrintWriter output = null;
 		try {
@@ -74,6 +104,8 @@ public class DateRangeReportProcessor {
 			if(output != null) output.close();
 		}
 	}
+	
+	//testing
 	public static void main(String args[]) {
 		MilkWeightDS ds = new MilkWeightDS();
 		InputReader ir = new InputReader(new File("src/2019-1.csv"));
