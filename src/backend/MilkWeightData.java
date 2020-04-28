@@ -13,31 +13,31 @@ public class MilkWeightData {
 	 * @param milkWeight
 	 * @param milkWeightPercent
 	 */
-	private MilkWeightData(String milkWeight, String milkWeightPercent, String ID) {
+	public MilkWeightData(String ID, String milkWeight, String milkWeightPercent) {
 		this.totalMilkWeight = new SimpleStringProperty(milkWeight);
 		this.totalPercent = new SimpleStringProperty(milkWeightPercent);
 		this.farmID = new SimpleStringProperty(ID);
 	}
 
-	private String getMilkWeight() {
+	public String getTotalMilkWeight() {
 		return totalMilkWeight.get();
 	}
 
-	private void setMilkWeight(String mw) {
+	public void setTotalMilkWeight(String mw) {
 		totalMilkWeight.set(mw);
 	}
 
-	private String getTotalPercent() {
+	public String getTotalPercent() {
 		return totalPercent.get();
 	}
 
-	private void setTotalPercent(String mwp) {
+	public void setTotalPercent(String mwp) {
 		totalPercent.set(mwp);
 	}
-	private String getFarmID() {
+	public String getFarmID() {
 		return farmID.get();
 	}
-	private void setFarmID(String id) {
+	public void setFarmID(String id) {
 		farmID.set(id);
 	}
 

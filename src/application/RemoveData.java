@@ -66,7 +66,7 @@ public class RemoveData extends Application {
 
     // set up right pane (Textfields & Add button)
     TextField date = new TextField();
-    date.setPromptText("Date");
+    date.setPromptText("Date (Ex: 2019-1-1)");
     date.setAlignment(Pos.CENTER);
 
     TextField farmID = new TextField();

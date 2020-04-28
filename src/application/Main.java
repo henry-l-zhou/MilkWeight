@@ -46,7 +46,7 @@ public class Main extends Application {
       history.push(ddp);
     });
 
-    // Edit Button setup
+    // Edit Button setup	
     Button editDataButton = new Button("Edit Data");
     editDataButton.setMinSize(180, 120);
     editDataButton.setStyle("-fx-background-color: #ffcccc; -fx-border-color: #000000");

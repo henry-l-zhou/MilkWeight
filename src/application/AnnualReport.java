@@ -62,7 +62,7 @@ public class AnnualReport extends Application {
     displayData.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        // displays data to the Table of Data
+        // displays data to the Table of Data 
       }
     });
 

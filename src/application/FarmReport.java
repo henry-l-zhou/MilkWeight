@@ -1,5 +1,6 @@
 package application;
 
+import backend.FarmReportProcessor;
 import backend.MilkWeight;
 import backend.MilkWeightData;
 import javafx.application.Application;
@@ -30,7 +31,7 @@ import javafx.stage.Stage;
 
 public class FarmReport extends Application {
   public static final String APP_TITLE = "Farm Report";
-  private final static ObservableList<MilkWeightData> data = FXCollections.observableArrayList();
+  private static ObservableList<MilkWeightData> data;
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
 public void start(Stage primaryStage) {
@@ -61,21 +62,8 @@ public void start(Stage primaryStage) {
     year.setAlignment(Pos.CENTER);
     year.setMaxWidth(150);
 
-    // set up Display Data
-    Button displayData = new Button("Display Data");
-    displayData.setMaxWidth(Double.MAX_VALUE);
-    displayData.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        // displays data to the Table of Data
-      }
-    });
-    // add buttons/textfields to the hBox
-    HBox hBox = new HBox();
-    hBox.setSpacing(20);
-    hBox.setPadding(new Insets(20, 0, 0, 0));
-    hBox.getChildren().addAll(farmID, year, displayData);
-    root.add(hBox, 0, 1);
+    
+
 
     // set up Table of Data
     TableView<MilkWeightData> table = new TableView<MilkWeightData>();
@@ -92,14 +80,37 @@ public void start(Stage primaryStage) {
     farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
     farmCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn weightCol = new TableColumn("Total Milk");
+    TableColumn weightCol = new TableColumn("Total Milk Percentage");
     weightCol.setMinWidth(200);
     weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
     weightCol.setStyle("-fx-alignment: CENTER;");
-
+    
+ // set up Display Data
+    Button displayData = new Button("Display Data");
+    displayData.setMaxWidth(Double.MAX_VALUE);
+    displayData.setOnAction(new EventHandler<ActionEvent>() {
+    	
+      @Override
+      public void handle(ActionEvent arg0) {
+    	FarmReportProcessor frp = new FarmReportProcessor(Main.ds, farmID.getText(), Integer.parseInt(year.getText()));
+    	data = FXCollections.observableArrayList();
+        for (int i = 1; i <= 12; i++) {
+        	data.add(new MilkWeightData(String.valueOf(i), String.valueOf(frp.getWeight(i)), String.valueOf(frp.getPercent(i))));
+        }
+        table.setItems(data);
+      }
+    });
     table.setItems(data);
     table.getColumns().addAll(yearCol, farmCol, weightCol);
-
+    
+    // add buttons/textfields to the hBox
+    HBox hBox = new HBox();
+    hBox.setSpacing(20);
+    hBox.setPadding(new Insets(20, 0, 0, 0));
+    hBox.getChildren().addAll(farmID, year, displayData);
+    root.add(hBox, 0, 1);
+    
+    
     VBox vBox = new VBox();
     vBox.setSpacing(5);
     vBox.setPadding(new Insets(10, 0, 10, 0));
