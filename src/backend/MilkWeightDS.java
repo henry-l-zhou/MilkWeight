@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class MilkWeightDS implements MilkWeightDSADT {
@@ -44,10 +45,15 @@ public class MilkWeightDS implements MilkWeightDSADT {
   }
 
   @Override
-  public int getFarms() {
+  public int getFarmNumber() {
     return mwHashMap.size();
   }
 
+  @Override 
+  public Set<String> getFarms(){
+    return mwHashMap.keySet();
+    
+  }
   @Override
   public int getEntries() {
     return mwTreeMap.size();

@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MilkWeightDSADT {
   /**
@@ -17,11 +18,16 @@ public interface MilkWeightDSADT {
   public boolean removeEntry(MilkWeight mw);
 
   /**
+   * Returns the set of farms 
+   * @return set of farms
+   */
+  public Set<String> getFarms();
+  
+  /**
    * Returns the number of farms 
    * @return int # of farms
    */
-  public int getFarms();
-
+  public int getFarmNumber();
   /**
    * Return the number of entries
    */
