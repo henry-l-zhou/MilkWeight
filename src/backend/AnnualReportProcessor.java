@@ -136,7 +136,7 @@ public class AnnualReportProcessor {
 	}
 
 	/**
-	 * Outputs the DateRangeReport as a CSV file
+	 * Outputs the AnnualReport as a CSV file
 	 */
 	public void toCSV() {
 		PrintWriter output = null;

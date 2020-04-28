@@ -3,6 +3,7 @@ package backend;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 /**
  * This class processes a MilkWeightDS to get stats for a specific farm and year
@@ -12,6 +13,9 @@ import java.util.List;
 public class FarmReportProcessor {
 	private int[] weights;
 	private double[] percents;
+	private int[] min;
+	private int[] max;
+	private double[] avg;
 	private String farmId;
 	private MilkWeightDS ds;
 	private int year;
@@ -28,6 +32,10 @@ public class FarmReportProcessor {
 		this.year = year;
 		weights = new int[12];
 		percents = new double[12];
+		min = new int[12];
+		Arrays.fill(min, Integer.MAX_VALUE);
+		max = new int[12];
+		avg = new double[12];
 		stats();
 	}
 	
@@ -38,6 +46,9 @@ public class FarmReportProcessor {
 		List<MilkWeight> farmReport = ds.getMilkWeightFarm(farmId, year);
 		for(MilkWeight mw : farmReport) {
 			weights[mw.getMonth() - 1] += mw.getWeight();
+			if(mw.getWeight() > max[mw.getMonth() - 1]) max[mw.getMonth() - 1] = mw.getWeight();
+			if(mw.getWeight() < min[mw.getMonth() - 1]) min[mw.getMonth() - 1] = mw.getWeight();
+			avg[mw.getMonth() - 1] += 1;
 		}
 		
 		for(int month = 1; month <= 12; month++) {
@@ -46,7 +57,8 @@ public class FarmReportProcessor {
 			for(MilkWeight mw : monthReport) {
 				sum += mw.getWeight();
 			}
-			percents[month - 1] = (double) weights[month - 1] / sum;
+			percents[month - 1] = Math.round((double) weights[month - 1] * 10000 / sum) / 100.0;
+			avg[month - 1] = weights[month - 1] / avg[month - 1];
 		}
 	}
 	
@@ -65,20 +77,51 @@ public class FarmReportProcessor {
 	 * @return the percent of total weight for that month
 	 */
 	public double getPercent(int month) {
-		return Math.round(percents[month - 1] * 10000) / 100.0;
+		return percents[month - 1];
 	}
 	
 	/**
-	 * Outputs the DateRangeReport as a CSV file
+	 * Gets the max milk weight of the month
+	 * 
+	 * @param month - the month
+	 * @return the max milk weight for this month
+	 */
+	public int getMax(int month) {
+		return max[month - 1];
+	}
+
+	/**
+	 * Gets the min milk weight of the month
+	 * 
+	 * @param month - the month
+	 * @return the min milk weight for this month
+	 */
+	public int getMin(int month) {
+		return min[month - 1];
+	}
+
+	/**
+	 * Gets the average milk weight for this month
+	 * 
+	 * @param month - the month
+	 * @return the average milk weight for this month
+	 */
+	public double getAvg(int month) {
+		return avg[month - 1];
+	}
+	
+	/**
+	 * Outputs the FarmReport as a CSV file
 	 */
 	public void toCSV() {
 		PrintWriter output = null;
 		try {
 			output = new PrintWriter("farm_report.csv");
-			output.print("month,weight,percent\n");
+			output.println("month,weight,percent,min,max,average");
 			for(int month = 1; month <= 12; month++) {
-				String out = month + "," + weights[month - 1] + "," + percents[month - 1] + "\n";
-				output.print(out);
+				String out = month + "," + weights[month - 1] + "," + percents[month - 1] + "," + min[month - 1] +
+						"," + max[month - 1] + "," + avg[month - 1];
+				output.println(out);
 			}
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
