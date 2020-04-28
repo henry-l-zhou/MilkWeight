@@ -84,17 +84,17 @@ public void start(Stage primaryStage) {
 
     TableColumn yearCol = new TableColumn("Month");
     yearCol.setMinWidth(100);
-    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("month"));
+    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmID"));
     yearCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn farmCol = new TableColumn("Farm ID");
+    TableColumn farmCol = new TableColumn("Total Weight");
     farmCol.setMinWidth(100);
-    farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmId"));
+    farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
     farmCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn weightCol = new TableColumn("Weight");
+    TableColumn weightCol = new TableColumn("Total Milk");
     weightCol.setMinWidth(200);
-    weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("weight"));
+    weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
     weightCol.setStyle("-fx-alignment: CENTER;");
 
     table.setItems(data);
