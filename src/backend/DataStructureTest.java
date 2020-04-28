@@ -45,7 +45,7 @@ class DataStructureTest {
   @Test
   public void test01_size() {
     // size of ds has to be two because only two were inserted
-    if (ds.size() != 4) { fail("Size is incorrect"); }
+    if (ds.getFarms() != 4) { fail("Size is incorrect"); }
   }
 
   /**

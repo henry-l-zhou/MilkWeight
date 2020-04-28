@@ -17,10 +17,15 @@ public interface MilkWeightDSADT {
   public boolean removeEntry(MilkWeight mw);
 
   /**
-   * Returns the number of  farms 
+   * Returns the number of farms 
    * @return int # of farms
    */
-  public int size();
+  public int getFarms();
+
+  /**
+   * Return the number of entries
+   */
+  public int getEntries();
 
   /**
    *  Returns list of  MilkWeightItems with  that date  
