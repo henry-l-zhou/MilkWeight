@@ -114,7 +114,7 @@ public class DateRangeReport extends Application {
         table.setItems(data);
       } catch (Exception ex) {
         InformationDialog info = new InformationDialog();
-        info.tableFormatError(primaryStage);
+        info.tableFormatError(primaryStage, ex);
 
       }
     });

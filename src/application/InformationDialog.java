@@ -31,6 +31,12 @@ public class InformationDialog extends Application {
     alert.showAndWait();
   }
 
+  public void addError(Stage arg0, Exception e) {
+    alert.setTitle("Add Data Error");
+    alert.setHeaderText(null);
+    alert.setContentText("Milk Weight Data could not be added: " + e.getMessage());
+    alert.showAndWait();
+  }
   /**
    * puts out an information dialog to notify user editing data occurred successfully
    * 
@@ -43,6 +49,16 @@ public class InformationDialog extends Application {
     alert.showAndWait();
   }
 
+  /**
+   * puts out an error message for incorrect file input
+   * @param arg0 the gui window
+   */
+  public void editError(Stage arg0, Exception e) {
+    alert.setTitle("Edit Data Error");
+    alert.setHeaderText(null);
+    alert.setContentText("ERROR: There was an error when trying to find data to edit: " + e.getMessage());
+    alert.showAndWait();
+  }
   /**
    * puts out an information dialog to notify user inputing file data occurred successfully
    * 
@@ -72,10 +88,10 @@ public class InformationDialog extends Application {
    * puts out an error message for incorrect file input
    * @param arg0 the gui window
    */
-  public void fileError(Stage arg0) {
+  public void fileError(Stage arg0, Exception e) {
     alert.setTitle("File Input Error");
     alert.setHeaderText(null);
-    alert.setContentText("ERROR: There was an error in file");
+    alert.setContentText("ERROR: There was an error in file: " + e.getMessage());
     alert.showAndWait();
   }
 
@@ -83,10 +99,10 @@ public class InformationDialog extends Application {
    * puts out an error message for incorrect file input
    * @param arg0 the gui window
    */
-  public void inputError(Stage arg0) {
+  public void inputError(Stage arg0, Exception e) {
     alert.setTitle("Input Data Error");
     alert.setHeaderText(null);
-    alert.setContentText("ERROR: There was an error with data to input");
+    alert.setContentText("ERROR: There was an error with data to input: " + e.getMessage());
     alert.showAndWait();
   }
 
@@ -94,31 +110,21 @@ public class InformationDialog extends Application {
    * puts out an error message for incorrect file input
    * @param arg0 the gui window
    */
-  public void removeError(Stage arg0) {
+  public void removeError(Stage arg0, Exception e) {
     alert.setTitle("Remove Data Error");
     alert.setHeaderText(null);
-    alert.setContentText("ERROR: There was an error when trying to remove data");
+    alert.setContentText("ERROR: There was an error when trying to remove data: " + e.getMessage());
     alert.showAndWait();
   }
   /**
    * puts out an error message for incorrect file input
    * @param arg0 the gui window
    */
-  public void tableFormatError(Stage arg0) {
+  public void tableFormatError(Stage arg0, Exception e) {
     alert.setTitle("Invalid input Error");
     alert.setHeaderText(null);
-    alert.setContentText("ERROR: There was an error when trying to access table information");
+    alert.setContentText("ERROR: There was an error when trying to access table information: " + e.getMessage());
     alert.showAndWait();
   }
 
-  /**
-   * puts out an error message for incorrect file input
-   * @param arg0 the gui window
-   */
-  public void editError(Stage arg0) {
-    alert.setTitle("Edit Data Error");
-    alert.setHeaderText(null);
-    alert.setContentText("ERROR: There was an error when trying to find data to edit");
-    alert.showAndWait();
-  }
 }

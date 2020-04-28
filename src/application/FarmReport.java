@@ -100,7 +100,7 @@ public class FarmReport extends Application {
 					table.setItems(data);
 				} catch (Exception e) {
 					InformationDialog info = new InformationDialog();
-					info.tableFormatError(primaryStage);
+					info.tableFormatError(primaryStage, e);
 				}
 			}
 		});

@@ -87,10 +87,11 @@ public class RemoveData extends Application {
         if (Main.ds.removeEntry(mw)) {
           info.remove(primaryStage);
         } else {
-          info.removeError(primaryStage);
+          
+          info.removeError(primaryStage, new Exception("Entry could not be found"));
         }
       } catch (Exception ex) {
-        info.removeError(primaryStage);
+        info.removeError(primaryStage, ex);
       }
     });
 

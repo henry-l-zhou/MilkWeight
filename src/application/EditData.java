@@ -119,15 +119,15 @@ public class EditData extends Application {
         MilkWeight newMW = InputReader.parseLine(newFarmID.getText(), newDate.getText(), NewMilkWeight.getText());
         info.edit(primaryStage);
         if (!Main.ds.contains(oldMW)) {
-          info.editError(primaryStage);
+          info.editError(primaryStage, new Exception("Data was not found"));
         } else {
           Main.ds.removeEntry(oldMW);
           Main.ds.insert(newMW);
         }
       } catch (FormatException ex1) {
-        info.editError(primaryStage);
+        info.editError(primaryStage, ex1);
       } catch (Exception ex2) {
-        info.editError(primaryStage);
+        info.editError(primaryStage, ex2);
       }
     });
 

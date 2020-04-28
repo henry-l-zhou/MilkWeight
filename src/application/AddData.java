@@ -80,8 +80,8 @@ public class AddData extends Application {
         ir.getList().forEach(mw->Main.ds.insert(mw));
         Main.ds.getMilkWeightFarm("Farm 0", 2019);
         info.inputFile(primaryStage, ir);
-      } catch (NullPointerException ex) {
-        info.fileError(primaryStage);
+      } catch (Exception ex) {
+        info.fileError(primaryStage, ex);
       }
     });
 
@@ -114,7 +114,7 @@ public class AddData extends Application {
         Main.ds.insert(item);
         info.add(primaryStage);
       } catch (Exception ex) {
-        info.editError(primaryStage);
+        info.addError(primaryStage, ex);
       }
     });
 
