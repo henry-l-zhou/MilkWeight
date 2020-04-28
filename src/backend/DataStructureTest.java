@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataStructureTest {
-  DataStructure ds;
+  MilkWeightDS ds;
   MilkWeight mw1;
   MilkWeight mw2;
   MilkWeight mw3;
@@ -20,7 +20,7 @@ class DataStructureTest {
   void setUp(){
     // initialize DataStrcuture
     
-    ds = new DataStructure();
+    ds = new MilkWeightDS();
 
     // insert two MilkWeight before test starts
     mw1 = new MilkWeight(2020, 4, 24, "Farm 1", 3793);

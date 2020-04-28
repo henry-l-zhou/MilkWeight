@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-public class DataStructure implements DataStructureADT {
+public class MilkWeightDS implements MilkWeightDSADT {
   private TreeMap<MilkWeight, MilkWeight> mwTreeMap;
   private Map<String, TreeMap<MilkWeight, MilkWeight>> mwHashMap;
 
-  public DataStructure() {
+  public MilkWeightDS() {
     mwTreeMap = new TreeMap<MilkWeight, MilkWeight>();
     mwHashMap = new HashMap<String, TreeMap<MilkWeight, MilkWeight>>();
 
@@ -92,7 +92,7 @@ public class DataStructure implements DataStructureADT {
   }
 
   public static void main(String[] args) {
-    DataStructure ds = new DataStructure();
+    MilkWeightDS ds = new MilkWeightDS();
     ds.insert(new MilkWeight(1699, 3, 11, "Farm 5", 69));
     ds.insert(new MilkWeight(1699, 4, 11, "Farm 5", 619));
     ds.insert(new MilkWeight(1699, 5, 11, "Farm 5", 169));

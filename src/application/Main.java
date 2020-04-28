@@ -1,7 +1,7 @@
 package application;
 
 import java.util.Stack;
-import backend.DataStructure;
+import backend.MilkWeightDS;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -26,7 +26,7 @@ public class Main extends Application {
   public static final String DEFAULT_FONT = "Calibri";
   public static final String APP_TITLE = "Milk Weight Data Visualizer";
   private static Stack<Application> history = new Stack<Application>();
-  public static DataStructure ds;
+  public static MilkWeightDS ds;
 
   public void start(Stage primaryStage) {
 
@@ -95,7 +95,7 @@ public class Main extends Application {
 
   public static void main(String[] args) {
     history.push(new Main());
-    ds = new DataStructure();
+    ds = new MilkWeightDS();
     launch(args);
   }
 }

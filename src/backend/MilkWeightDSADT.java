@@ -2,7 +2,7 @@ package backend;
 
 import java.util.List;
 
-public interface DataStructureADT {
+public interface MilkWeightDSADT {
   /**
    * Adds a new farmID,  date and milkWeight  entry 
    * @param mw

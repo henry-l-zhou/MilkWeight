@@ -1,7 +1,7 @@
 package application;
 
 import java.io.File;
-import backend.DataStructure;
+import backend.MilkWeightDS;
 import backend.InputReader;
 import backend.MilkWeight;
 import javafx.application.Application;
