@@ -1,6 +1,7 @@
 package application;
 
 import backend.MilkWeight;
+import backend.MilkWeightData;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -29,12 +30,10 @@ import javafx.stage.Stage;
 
 public class FarmReport extends Application {
   public static final String APP_TITLE = "Farm Report";
-  private final static ObservableList<MilkWeight> data =
-      FXCollections.observableArrayList(new MilkWeight(2018, 1, 1, "Farm 1", 5451),
-          new MilkWeight(2018, 1, 1, "Farm 2", 8754), new MilkWeight(2019, 1, 1, "Farm 1", 84125),
-          new MilkWeight(2019, 1, 1, "Farm 3", 9874), new MilkWeight(2019, 1, 1, "Farm 4", 74106));
+  private final static ObservableList<MilkWeightData> data = FXCollections.observableArrayList();
 
-  public void start(Stage primaryStage) {
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+public void start(Stage primaryStage) {
 
     // GridPane setup
     GridPane root = new GridPane();
@@ -79,23 +78,23 @@ public class FarmReport extends Application {
     root.add(hBox, 0, 1);
 
     // set up Table of Data
-    TableView<MilkWeight> table = new TableView<MilkWeight>();
+    TableView<MilkWeightData> table = new TableView<MilkWeightData>();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.setEditable(true);
 
-    TableColumn yearCol = new TableColumn("Year");
+    TableColumn yearCol = new TableColumn("Month");
     yearCol.setMinWidth(100);
-    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("date"));
+    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("month"));
     yearCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn farmCol = new TableColumn("Farm ID");
     farmCol.setMinWidth(100);
-    farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("farmId"));
+    farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmId"));
     farmCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn weightCol = new TableColumn("Weight");
     weightCol.setMinWidth(200);
-    weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("weight"));
+    weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("weight"));
     weightCol.setStyle("-fx-alignment: CENTER;");
 
     table.setItems(data);
