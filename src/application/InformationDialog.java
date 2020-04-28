@@ -126,5 +126,27 @@ public class InformationDialog extends Application {
     alert.setContentText("ERROR: There was an error when trying to access table information: " + e.getMessage());
     alert.showAndWait();
   }
+  
+  /**
+   * puts out an error message for csv output
+   * @param arg0 the gui window
+   */
+  public void toCSVInvalid(Stage arg0, Exception e) {
+    alert.setTitle("CSV could not be created");
+    alert.setHeaderText(null);
+    alert.setContentText("ERROR: There was an error when trying to create this csv: " + e.getMessage());
+    alert.showAndWait();
+  }
+  
+  /**
+   * puts out a success message when csv file has been made
+   * @param arg0 the gui window
+   */
+  public void toCSV(Stage arg0) {
+    alert.setTitle("CSV Sent");
+    alert.setHeaderText(null);
+    alert.setContentText("CSV has been created successfully. ");
+    alert.showAndWait();
+  }
 
 }

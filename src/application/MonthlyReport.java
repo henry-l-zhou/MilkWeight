@@ -36,8 +36,8 @@ import javafx.stage.Stage;
 
 public class MonthlyReport extends Application {
   public static final String APP_TITLE = "Monthly Report";
-  private static ObservableList<MilkWeightData> data;
-
+  private ObservableList<MilkWeightData> data;
+  private MonthlyReportProcessor mrp;
   public void start(Stage primaryStage) {
 
     // GridPane setup
@@ -66,6 +66,21 @@ public class MonthlyReport extends Application {
     year.setAlignment(Pos.CENTER);
     year.setMaxWidth(150);
 
+    // setup a send to csv button
+    Button sendToCSV = new Button("SendToCSV");
+    sendToCSV.setVisible(false);
+    sendToCSV.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
+    sendToCSV.setMinSize(100, 40);
+    sendToCSV.setOnAction(e -> {
+      InformationDialog info = new InformationDialog();
+      if (mrp != null ) {
+        mrp.toCSV();
+        info.toCSV(primaryStage);
+      } else {
+        info.toCSVInvalid(primaryStage, new Exception("CSV could not be created"));
+      }
+    });
+    
     // set up Table of Data
     TableView<MilkWeightData> table = new TableView<MilkWeightData>();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -92,7 +107,7 @@ public class MonthlyReport extends Application {
     displayData.setOnAction(e -> {
 
       try {
-        MonthlyReportProcessor mrp =
+        mrp =
             new MonthlyReportProcessor(Main.ds, Integer.parseInt(month.getText()), Integer.parseInt(year.getText()));
         data = FXCollections.observableArrayList();
         
@@ -101,6 +116,7 @@ public class MonthlyReport extends Application {
               String.valueOf(mrp.getPercent(farmId))));
         }
         table.setItems(data);
+        sendToCSV.setVisible(true);
       } catch (Exception ex) {
         InformationDialog info = new InformationDialog();
         info.tableFormatError(primaryStage,ex);
@@ -152,8 +168,8 @@ public class MonthlyReport extends Application {
       }
     });
 
-    hBox2.getChildren().addAll(backButton, homeButton);
-    hBox2.setSpacing(250);
+    hBox2.getChildren().addAll(backButton, sendToCSV, homeButton);
+    hBox2.setSpacing(68);
     root.add(hBox2, 0, 3);
 
     // make font size all the same

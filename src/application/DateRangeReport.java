@@ -36,8 +36,8 @@ import javafx.stage.Stage;
 
 public class DateRangeReport extends Application {
   public static final String APP_TITLE = "Date Range Report";
-  private static ObservableList<MilkWeightData> data;
-
+  private ObservableList<MilkWeightData> data;
+  private DateRangeReportProcessor drrp;
   public void start(Stage primaryStage) {
 
     // GridPane setup
@@ -66,6 +66,21 @@ public class DateRangeReport extends Application {
     endDate.setAlignment(Pos.CENTER);
     endDate.setMaxWidth(150);
 
+    // setup a send to csv button
+    Button sendToCSV = new Button("SendToCSV");
+    sendToCSV.setVisible(false);
+    sendToCSV.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
+    sendToCSV.setMinSize(100, 40);
+    sendToCSV.setOnAction(e -> {
+      InformationDialog info = new InformationDialog();
+      if (drrp != null ) {
+        drrp.toCSV();
+        info.toCSV(primaryStage);
+      } else {
+        info.toCSVInvalid(primaryStage, new Exception("CSV could not be created"));
+      }
+    });
+    
     // set up Table of Data
     TableView<MilkWeightData> table = new TableView<MilkWeightData>();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -101,7 +116,7 @@ public class DateRangeReport extends Application {
       String yearTo = toDateSplit[0];
       String monthTo = toDateSplit[1];
       String dateTo = toDateSplit[2];
-        DateRangeReportProcessor drrp = new DateRangeReportProcessor(Main.ds, Integer.parseInt(dateFrom),
+        drrp = new DateRangeReportProcessor(Main.ds, Integer.parseInt(dateFrom),
             Integer.parseInt(monthFrom), Integer.parseInt(yearFrom), Integer.parseInt(dateTo),
             Integer.parseInt(monthTo), Integer.parseInt(yearTo));
         data = FXCollections.observableArrayList();
@@ -112,6 +127,7 @@ public class DateRangeReport extends Application {
               String.valueOf(drrp.getPercent(farmId))));
         }
         table.setItems(data);
+        sendToCSV.setVisible(true);
       } catch (Exception ex) {
         InformationDialog info = new InformationDialog();
         info.tableFormatError(primaryStage, ex);
@@ -155,8 +171,8 @@ public class DateRangeReport extends Application {
       Main.addHistory(main);
     });
 
-    hBox2.getChildren().addAll(backButton, homeButton);
-    hBox2.setSpacing(250);
+    hBox2.getChildren().addAll(backButton, sendToCSV, homeButton);
+    hBox2.setSpacing(68);
     root.add(hBox2, 0, 3);
 
     // make font size all the same

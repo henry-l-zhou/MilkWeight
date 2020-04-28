@@ -45,7 +45,7 @@ public class DisplayDataPage extends Application{
       public void handle(ActionEvent arg0) {
     	  FarmReport frp = new FarmReport();
           frp.start(primaryStage);
-          Main.addHistory(new FarmReport());
+          Main.addHistory(frp);
       }
     });
 
@@ -58,7 +58,8 @@ public class DisplayDataPage extends Application{
       public void handle(ActionEvent arg0) {
         AnnualReport arp = new AnnualReport();
         arp.start(primaryStage);
-        Main.addHistory(new AnnualReport());
+        
+        Main.addHistory(arp);
       }
     });
     // Monthly Report Button setup
@@ -70,7 +71,7 @@ public class DisplayDataPage extends Application{
       public void handle(ActionEvent arg0) {
     	  MonthlyReport mrp = new MonthlyReport();
     	  mrp.start(primaryStage);
-    	  Main.addHistory(new MonthlyReport());
+    	  Main.addHistory(mrp);
       }
     });
 
@@ -83,7 +84,8 @@ public class DisplayDataPage extends Application{
       public void handle(ActionEvent arg0) {
     	  DateRangeReport drrp = new DateRangeReport();
     	  drrp.start(primaryStage);
-    	  Main.addHistory(new DateRangeReport());
+    	  Main.addHistory(drrp);
+    	  
       }
     });
 
