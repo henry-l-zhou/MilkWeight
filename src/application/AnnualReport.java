@@ -76,23 +76,23 @@ public class AnnualReport extends Application {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.setEditable(true);
 
-    TableColumn yearCol = new TableColumn("Year");
-    yearCol.setMinWidth(100);
-    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("date"));
-    yearCol.setStyle("-fx-alignment: CENTER;");
-
     TableColumn farmCol = new TableColumn("Farm ID");
     farmCol.setMinWidth(100);
     farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("farmId"));
     farmCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn weightCol = new TableColumn("Weight");
-    weightCol.setMinWidth(200);
+    weightCol.setMinWidth(100);
     weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("weight"));
     weightCol.setStyle("-fx-alignment: CENTER;");
 
+    TableColumn percentCol = new TableColumn("Percent");
+    percentCol.setMinWidth(200);
+    percentCol.setCellValueFactory(new PropertyValueFactory<MilkWeight, String>("weight"));
+    percentCol.setStyle("-fx-alignment: CENTER;");
+    
     table.setItems(data);
-    table.getColumns().addAll(yearCol, farmCol, weightCol);
+    table.getColumns().addAll(farmCol, weightCol, percentCol);
 
     VBox vBox = new VBox(5);
     vBox.setPadding(new Insets(10, 0, 10, 0));
