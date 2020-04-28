@@ -20,6 +20,10 @@ public class MilkWeightDS implements MilkWeightDSADT {
 
   @Override
   public void insert(MilkWeight mw) {
+    if (mwTreeMap.containsKey(mw)) {
+      System.out.println("duplicate");
+      return;
+    }
     //TREE MAP INSERTION
     mwTreeMap.put(mw, mw);
 
@@ -40,10 +44,15 @@ public class MilkWeightDS implements MilkWeightDSADT {
   }
 
   @Override
-  public int size() {
-    return mwTreeMap.size();
+  public int getFarms() {
+    return mwHashMap.size();
   }
 
+  @Override
+  public int getEntries() {
+    return mwTreeMap.size();
+  }
+  
   @Override
   public List<MilkWeight> getMilkWeightDateRange(int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo,
       int yearTo) {

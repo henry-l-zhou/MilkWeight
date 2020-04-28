@@ -106,7 +106,13 @@ public class AddData extends Application {
     addData.setMaxWidth(Double.MAX_VALUE);
     addData.setAlignment(Pos.CENTER);
     addData.setOnAction(e -> {
-
+      try {
+        MilkWeight item = InputReader.parseLine(farmID.getText(), date.getText(), milkWeight.getText());
+        Main.ds.insert(item);
+        //System.out.println(Main.ds.size());
+      } catch (Exception ex) {
+        System.out.println("Error in input");
+      }
     });
 
     VBox vBox2 = new VBox();

@@ -27,12 +27,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class FarmReport extends Application{
+public class FarmReport extends Application {
   public static final String APP_TITLE = "Farm Report";
   private final static ObservableList<MilkWeight> data =
       FXCollections.observableArrayList(new MilkWeight(2018, 1, 1, "Farm 1", 5451),
-          new MilkWeight(2018, 1, 1,  "Farm 2", 8754), new MilkWeight(2019, 1, 1,  "Farm 1", 84125),
-          new MilkWeight(2019, 1, 1,  "Farm 3", 9874), new MilkWeight(2019, 1, 1,  "Farm 4", 74106));
+          new MilkWeight(2018, 1, 1, "Farm 2", 8754), new MilkWeight(2019, 1, 1, "Farm 1", 84125),
+          new MilkWeight(2019, 1, 1, "Farm 3", 9874), new MilkWeight(2019, 1, 1, "Farm 4", 74106));
 
   public void start(Stage primaryStage) {
 
@@ -55,7 +55,7 @@ public class FarmReport extends Application{
     farmID.setPromptText("Enter Farm ID");
     farmID.setAlignment(Pos.CENTER);
     farmID.setMaxWidth(150);
-    
+
     // set up Enter Year
     TextField year = new TextField();
     year.setPromptText("Enter Year");
@@ -112,27 +112,21 @@ public class FarmReport extends Application{
     Button backButton = new Button("Back");
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
     backButton.setMinSize(100, 40);
-    backButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        try {
-          Main.lastUsedStage().start(primaryStage);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    backButton.setOnAction(e -> {
+      try {
+        Main.lastUsedStage().start(primaryStage);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
     });
 
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 40);
-    homeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
+    homeButton.setOnAction(e-> {
         Main main = new Main();
         main.start(primaryStage);
         Main.addHistory(main);
-      }
     });
 
     hBox2.getChildren().addAll(backButton, homeButton);

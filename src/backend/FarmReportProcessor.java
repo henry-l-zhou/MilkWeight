@@ -66,7 +66,7 @@ public class FarmReportProcessor {
 		MilkWeightDS ds = new MilkWeightDS();
 		InputReader ir = new InputReader(new File("src/2019-1.csv"));
 		ir.getList().forEach(mw -> ds.insert(mw));
-		FarmReportProcessor frp = new FarmReportProcessor(ds, "Farm 0", 2019);
+		FarmReportProcessor frp = new FarmReportProcessor(ds, "Farm 100", 2019);
 		frp.toCSV();
 	}
 }
