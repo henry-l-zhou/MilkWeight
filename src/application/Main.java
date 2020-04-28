@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Stack;
+import backend.DataStructure;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -25,6 +26,7 @@ public class Main extends Application {
   public static final String DEFAULT_FONT = "Calibri";
   public static final String APP_TITLE = "Milk Weight Data Visualizer";
   private static Stack<Application> history = new Stack<Application>();
+  public static DataStructure ds;
 
   public void start(Stage primaryStage) {
 
@@ -38,10 +40,10 @@ public class Main extends Application {
     Button displayDataButton = new Button("Display Data");
     displayDataButton.setMinSize(180, 120);
     displayDataButton.setStyle("-fx-background-color: #b3ff99; -fx-border-color: #000000");
-    displayDataButton.setOnAction(e-> {
-        DisplayDataPage ddp = new DisplayDataPage();
-        ddp.start(primaryStage);
-        history.push(ddp);
+    displayDataButton.setOnAction(e -> {
+      DisplayDataPage ddp = new DisplayDataPage();
+      ddp.start(primaryStage);
+      history.push(ddp);
     });
 
     // Edit Button setup
@@ -57,10 +59,8 @@ public class Main extends Application {
     // Exit Button setup
     Button exitButton = new Button("Exit");
     exitButton.setStyle("-fx-background-color: #f8f8ff; -fx-border-color: #000000");
-    exitButton.setOnAction(e -> {
-      primaryStage.close();
-    });
-    
+    exitButton.setOnAction(e -> { primaryStage.close(); });
+
     // Title Label setup
     Label titleLabel = new Label("Milk Weight Organizer");
     titleLabel.setAlignment(Pos.CENTER);
@@ -95,6 +95,7 @@ public class Main extends Application {
 
   public static void main(String[] args) {
     history.push(new Main());
+    ds = new DataStructure();
     launch(args);
   }
 }

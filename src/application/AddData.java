@@ -1,5 +1,8 @@
 package application;
 
+import java.io.File;
+import backend.DataStructure;
+import backend.InputReader;
 import backend.MilkWeight;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -23,6 +26,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AddData extends Application {
@@ -61,10 +65,22 @@ public class AddData extends Application {
     });
 
     // file input setup
+    FileChooser fc = new FileChooser();
+    fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
     Button fileInput = new Button("Add By File Input");
     fileInput.setMaxWidth(Double.MAX_VALUE);
     fileInput.setOnAction(e -> {
-      // go to add by file input class
+      File inputFile = fc.showOpenDialog(primaryStage);
+      try {
+        InputReader ir = new InputReader(inputFile);
+        
+        //System.out.println(ir.getList());
+        
+        ir.getList().forEach(mw->Main.ds.insert(mw));
+        Main.ds.getMilkWeightFarm("Farm 0", 2019);
+      } catch (NullPointerException ex) {
+        System.out.println("file not selected");
+      }
     });
 
     VBox vBox = new VBox();
