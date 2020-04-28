@@ -30,125 +30,128 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class FarmReport extends Application {
-  public static final String APP_TITLE = "Farm Report";
-  private static ObservableList<MilkWeightData> data;
+	public static final String APP_TITLE = "Farm Report";
+	private static ObservableList<MilkWeightData> data;
 
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-public void start(Stage primaryStage) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void start(Stage primaryStage) {
 
-    // GridPane setup
-    GridPane root = new GridPane();
-    root.setPadding(new Insets(20, 70, 20, 70));
-    BackgroundFill bgfill = new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY);
-    root.setBackground(new Background(bgfill));
+		// GridPane setup
+		GridPane root = new GridPane();
+		root.setPadding(new Insets(20, 70, 20, 70));
+		BackgroundFill bgfill = new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY);
+		root.setBackground(new Background(bgfill));
 
-    // set up title
-    Label titleLabel = new Label(APP_TITLE);
-    titleLabel.setStyle("-fx-background-color: #c679ec; -fx-border-color: #000000");
-    titleLabel.setMaxWidth(Double.MAX_VALUE);
-    titleLabel.setAlignment(Pos.CENTER);
-    titleLabel.setMinSize(460, 30);
-    root.add(titleLabel, 0, 0);
+		// set up title
+		Label titleLabel = new Label(APP_TITLE);
+		titleLabel.setStyle("-fx-background-color: #c679ec; -fx-border-color: #000000");
+		titleLabel.setMaxWidth(Double.MAX_VALUE);
+		titleLabel.setAlignment(Pos.CENTER);
+		titleLabel.setMinSize(460, 30);
+		root.add(titleLabel, 0, 0);
 
-    // set up Enter FarmID
-    TextField farmID = new TextField();
-    farmID.setPromptText("Enter Farm ID");
-    farmID.setAlignment(Pos.CENTER);
-    farmID.setMaxWidth(150);
+		// set up Enter FarmID
+		TextField farmID = new TextField();
+		farmID.setPromptText("Enter Farm ID");
+		farmID.setAlignment(Pos.CENTER);
+		farmID.setMaxWidth(150);
 
-    // set up Enter Year
-    TextField year = new TextField();
-    year.setPromptText("Enter Year");
-    year.setAlignment(Pos.CENTER);
-    year.setMaxWidth(150);
+		// set up Enter Year
+		TextField year = new TextField();
+		year.setPromptText("Enter Year");
+		year.setAlignment(Pos.CENTER);
+		year.setMaxWidth(150);
 
-    
+		// set up Table of Data
+		TableView<MilkWeightData> table = new TableView<MilkWeightData>();
+		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		table.setEditable(true);
 
+		TableColumn yearCol = new TableColumn("Month");
+		yearCol.setMinWidth(100);
+		yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmID"));
+		yearCol.setStyle("-fx-alignment: CENTER;");
 
-    // set up Table of Data
-    TableView<MilkWeightData> table = new TableView<MilkWeightData>();
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    table.setEditable(true);
+		TableColumn farmCol = new TableColumn("Total Weight");
+		farmCol.setMinWidth(100);
+		farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
+		farmCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn yearCol = new TableColumn("Month");
-    yearCol.setMinWidth(100);
-    yearCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("farmID"));
-    yearCol.setStyle("-fx-alignment: CENTER;");
+		TableColumn weightCol = new TableColumn("%");
+		weightCol.setMinWidth(200);
+		weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
+		weightCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn farmCol = new TableColumn("Total Weight");
-    farmCol.setMinWidth(100);
-    farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
-    farmCol.setStyle("-fx-alignment: CENTER;");
+		// set up Display Data
+		Button displayData = new Button("Display Data");
+		displayData.setMaxWidth(Double.MAX_VALUE);
+		displayData.setOnAction(new EventHandler<ActionEvent>() {
 
-    TableColumn weightCol = new TableColumn("%");
-    weightCol.setMinWidth(200);
-    weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
-    weightCol.setStyle("-fx-alignment: CENTER;");
-    
- // set up Display Data
-    Button displayData = new Button("Display Data");
-    displayData.setMaxWidth(Double.MAX_VALUE);
-    displayData.setOnAction(new EventHandler<ActionEvent>() {
-    	
-      @Override
-      public void handle(ActionEvent arg0) {
-    	FarmReportProcessor frp = new FarmReportProcessor(Main.ds, farmID.getText(), Integer.parseInt(year.getText()));
-    	data = FXCollections.observableArrayList();
-        for (int i = 1; i <= 12; i++) {
-        	data.add(new MilkWeightData(String.valueOf(i), String.valueOf(frp.getWeight(i)), String.valueOf(frp.getPercent(i))));
-        }
-        table.setItems(data);
-      }
-    });
-    table.setItems(data);
-    table.getColumns().addAll(yearCol, farmCol, weightCol);
-    
-    // add buttons/textfields to the hBox
-    HBox hBox = new HBox();
-    hBox.setSpacing(20);
-    hBox.setPadding(new Insets(20, 0, 0, 0));
-    hBox.getChildren().addAll(farmID, year, displayData);
-    root.add(hBox, 0, 1);
-    
-    
-    VBox vBox = new VBox();
-    vBox.setSpacing(5);
-    vBox.setPadding(new Insets(10, 0, 10, 0));
-    vBox.getChildren().addAll(table);
-    root.add(vBox, 0, 2);
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					FarmReportProcessor frp = new FarmReportProcessor(Main.ds, farmID.getText(),
+							Integer.parseInt(year.getText()));
+					data = FXCollections.observableArrayList();
+					for (int i = 1; i <= 12; i++) {
+						data.add(new MilkWeightData(String.valueOf(i), String.valueOf(frp.getWeight(i)),
+								String.valueOf(frp.getPercent(i))));
+					}
+					table.setItems(data);
+				} catch (Exception e) {
+					InformationDialog info = new InformationDialog();
+					info.tableFormatError(primaryStage);
+				}
+			}
+		});
+		table.setItems(data);
+		table.getColumns().addAll(yearCol, farmCol, weightCol);
 
-    // set up Back and Home button
-    HBox hBox2 = new HBox();
-    Button backButton = new Button("Back");
-    backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
-    backButton.setMinSize(100, 40);
-    backButton.setOnAction(e -> {
-      try {
-        Main.lastUsedStage().start(primaryStage);
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-    });
+		// add buttons/textfields to the hBox
+		HBox hBox = new HBox();
+		hBox.setSpacing(20);
+		hBox.setPadding(new Insets(20, 0, 0, 0));
+		hBox.getChildren().addAll(farmID, year, displayData);
+		root.add(hBox, 0, 1);
 
-    Button homeButton = new Button("Home");
-    homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
-    homeButton.setMinSize(100, 40);
-    homeButton.setOnAction(e-> {
-        Main main = new Main();
-        main.start(primaryStage);
-        Main.addHistory(main);
-    });
+		VBox vBox = new VBox();
+		vBox.setSpacing(5);
+		vBox.setPadding(new Insets(10, 0, 10, 0));
+		vBox.getChildren().addAll(table);
+		root.add(vBox, 0, 2);
 
-    hBox2.getChildren().addAll(backButton, homeButton);
-    hBox2.setSpacing(250);
-    root.add(hBox2, 0, 3);
+		// set up Back and Home button
+		HBox hBox2 = new HBox();
+		Button backButton = new Button("Back");
+		backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
+		backButton.setMinSize(100, 40);
+		backButton.setOnAction(e -> {
+			try {
+				Main.lastUsedStage().start(primaryStage);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		});
 
-    // make font size all the same
-    DoubleProperty fontSize = new SimpleDoubleProperty(13); // font size in pt
-    root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
+		Button homeButton = new Button("Home");
+		homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
+		homeButton.setMinSize(100, 40);
+		homeButton.setOnAction(e -> {
+			Main main = new Main();
+			main.start(primaryStage);
+			Main.addHistory(main);
+		});
 
-    Scene scene = new Scene(root, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-    primaryStage.setScene(scene);
-    primaryStage.show();
-  }
+		hBox2.getChildren().addAll(backButton, homeButton);
+		hBox2.setSpacing(250);
+		root.add(hBox2, 0, 3);
+
+		// make font size all the same
+		DoubleProperty fontSize = new SimpleDoubleProperty(13); // font size in pt
+		root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
+
+		Scene scene = new Scene(root, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
 }

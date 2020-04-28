@@ -100,6 +100,16 @@ public class InformationDialog extends Application {
     alert.setContentText("ERROR: There was an error when trying to remove data");
     alert.showAndWait();
   }
+  /**
+   * puts out an error message for incorrect file input
+   * @param arg0 the gui window
+   */
+  public void tableFormatError(Stage arg0) {
+    alert.setTitle("Invalid input Error");
+    alert.setHeaderText(null);
+    alert.setContentText("ERROR: There was an error when trying to access table information");
+    alert.showAndWait();
+  }
 
   /**
    * puts out an error message for incorrect file input
