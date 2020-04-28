@@ -62,7 +62,7 @@ public class Main extends Application {
     exitButton.setOnAction(e -> { primaryStage.close(); });
 
     // Title Label setup
-    Label titleLabel = new Label("Milk Weight Organizer");
+    Label titleLabel = new Label(" Milk Weight Organizer ");
     titleLabel.setAlignment(Pos.CENTER);
     titleLabel.setStyle("-fx-background-color: #f8f8ff; -fx-border-color: #000000");
 

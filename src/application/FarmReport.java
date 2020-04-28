@@ -80,7 +80,7 @@ public void start(Stage primaryStage) {
     farmCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
     farmCol.setStyle("-fx-alignment: CENTER;");
 
-    TableColumn weightCol = new TableColumn("Total Milk Percentage");
+    TableColumn weightCol = new TableColumn("%");
     weightCol.setMinWidth(200);
     weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
     weightCol.setStyle("-fx-alignment: CENTER;");
