@@ -6,6 +6,9 @@ public class MilkWeightData {
 	private final SimpleStringProperty totalMilkWeight;
 	private final SimpleStringProperty totalPercent;
 	private final SimpleStringProperty farmID;
+	private final SimpleStringProperty min;
+	private final SimpleStringProperty max;
+	private final SimpleStringProperty avg;
 
 	/**
 	 * constructor method that instantiates the weight/percent
@@ -13,10 +16,13 @@ public class MilkWeightData {
 	 * @param milkWeight
 	 * @param milkWeightPercent
 	 */
-	public MilkWeightData(String ID, String milkWeight, String milkWeightPercent) {
+	public MilkWeightData(String ID, String milkWeight, String milkWeightPercent, String min, String max, String avg) {
 		this.totalMilkWeight = new SimpleStringProperty(milkWeight);
 		this.totalPercent = new SimpleStringProperty(milkWeightPercent);
 		this.farmID = new SimpleStringProperty(ID);
+		this.min = new SimpleStringProperty(min);
+		this.max = new SimpleStringProperty(max);
+		this.avg = new SimpleStringProperty(avg);
 	}
 
 	public String getTotalMilkWeight() {
@@ -40,5 +46,28 @@ public class MilkWeightData {
 	public void setFarmID(String id) {
 		farmID.set(id);
 	}
-
+	
+	public String getMin() {
+		return min.get();
+	}
+	
+	public void setMin(String min) {
+		this.min.set(min);
+	}
+	
+	public String getMax() {
+		return max.get();
+	}
+	
+	public void setMax(String max) {
+		this.max.set(max);
+	}
+	
+	public String getAvg() {
+		return avg.get();
+	}
+	
+	public void setAvg(String avg) {
+		this.avg.set(avg);
+	}
 }

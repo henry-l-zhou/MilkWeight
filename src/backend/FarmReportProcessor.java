@@ -58,7 +58,7 @@ public class FarmReportProcessor {
 				sum += mw.getWeight();
 			}
 			percents[month - 1] = Math.round((double) weights[month - 1] * 10000 / sum) / 100.0;
-			avg[month - 1] = weights[month - 1] / avg[month - 1];
+			avg[month - 1] = Math.round(weights[month - 1] * 100 / avg[month - 1]) / 100.0;
 		}
 	}
 	

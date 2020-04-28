@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +69,7 @@ public class AnnualReportProcessor {
 			sum += mw.getWeight();
 		}
 		for (String farmId : weights.keySet()) {
-			avg.put(farmId, weights.get(farmId) / avg.get(farmId)); //calc avg by dividing totals by counts
+			avg.put(farmId, Math.round(weights.get(farmId) * 100 / avg.get(farmId)) / 100.0); //calc avg by dividing totals by counts
 			percents.put(farmId, Math.round((double) weights.get(farmId) * 10000 / sum) / 100.0); //calc percent by dividing weights
 		}
 	}

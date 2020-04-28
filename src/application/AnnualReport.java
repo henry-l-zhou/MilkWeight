@@ -1,12 +1,6 @@
 package application;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import backend.AnnualReportProcessor;
-import backend.FarmReportProcessor;
-import backend.MilkWeight;
 import backend.MilkWeightData;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -14,8 +8,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -77,7 +69,8 @@ public class AnnualReport extends Application {
     
     // set up Table of Data
     TableView<MilkWeightData> table = new TableView<MilkWeightData>();
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+    
     table.setEditable(true);
 
     TableColumn farmCol = new TableColumn("Farm ID");
@@ -86,14 +79,29 @@ public class AnnualReport extends Application {
     farmCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn weightCol = new TableColumn("Total Weight");
-    weightCol.setMinWidth(100);
+    weightCol.setMinWidth(150);
     weightCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalMilkWeight"));
     weightCol.setStyle("-fx-alignment: CENTER;");
 
     TableColumn percentageCol = new TableColumn("%");
-    percentageCol.setMinWidth(200);
+    percentageCol.setMinWidth(100);
     percentageCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("totalPercent"));
     percentageCol.setStyle("-fx-alignment: CENTER;");
+
+    TableColumn minCol = new TableColumn("Min");
+    minCol.setMinWidth(100);
+    minCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("min"));
+    minCol.setStyle("-fx-alignment: CENTER;");
+    
+    TableColumn maxCol = new TableColumn("Max");
+    maxCol.setMinWidth(100);
+    maxCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("max"));
+    maxCol.setStyle("-fx-alignment: CENTER;");
+    
+    TableColumn avgCol = new TableColumn("Average");
+    avgCol.setMinWidth(100);
+    avgCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("avg"));
+    avgCol.setStyle("-fx-alignment: CENTER;");
 
     // set up Display Data
     Button displayData = new Button("Display Data");
@@ -105,7 +113,8 @@ public class AnnualReport extends Application {
         data = FXCollections.observableArrayList();
         for (String farmId : arp.uniqueFarms()) {
           data.add(new MilkWeightData(farmId, String.valueOf(arp.getWeight(farmId)),
-              String.valueOf(arp.getPercent(farmId))));
+              String.valueOf(arp.getPercent(farmId)), String.valueOf(arp.getMin(farmId)), 
+            		  String.valueOf(arp.getMax(farmId)), String.valueOf(arp.getAvg(farmId))));
         }
         table.setItems(data);
         sendToCSV.setVisible(true);
@@ -123,7 +132,7 @@ public class AnnualReport extends Application {
     root.add(hBox, 0, 1);
 
     table.setItems(data);
-    table.getColumns().addAll(farmCol, weightCol, percentageCol);
+    table.getColumns().addAll(farmCol, weightCol, percentageCol, minCol, maxCol, avgCol);
 
     VBox vBox = new VBox(5);
     vBox.setPadding(new Insets(10, 0, 10, 0));
