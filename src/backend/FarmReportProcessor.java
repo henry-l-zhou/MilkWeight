@@ -65,7 +65,7 @@ public class FarmReportProcessor {
 	 * @return the percent of total weight for that month
 	 */
 	public double getPercent(int month) {
-		return percents[month - 1];
+		return Math.round(percents[month - 1] * 10000) / 100.0;
 	}
 	
 	/**

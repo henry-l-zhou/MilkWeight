@@ -71,7 +71,7 @@ public class MonthlyReportProcessor {
 	 * @return the percent of the total weight for that farm ID in that month and year
 	 */
 	public double getPercent(String farmId) {
-		return percents.get(farmId);
+		return Math.round(percents.get(farmId) * 10000) / 100.0;
 	}
 	
 	/**
