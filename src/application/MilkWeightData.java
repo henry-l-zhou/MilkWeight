@@ -1,4 +1,4 @@
-package backend;
+package application;
 
 import javafx.beans.property.SimpleStringProperty;
 

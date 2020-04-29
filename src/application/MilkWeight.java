@@ -1,4 +1,4 @@
-package backend;
+package application;
 
 /**
  * This class represents a single Milk Weight Item with a

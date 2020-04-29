@@ -1,6 +1,5 @@
 package application;
 
-import backend.InputReader;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

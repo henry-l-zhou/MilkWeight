@@ -1,8 +1,5 @@
 package application;
 
-import backend.FormatException;
-import backend.InputReader;
-import backend.MilkWeight;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;

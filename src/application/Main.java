@@ -1,7 +1,7 @@
 package application;
 
 import java.util.Stack;
-import backend.MilkWeightDS;
+
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;

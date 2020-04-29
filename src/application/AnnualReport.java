@@ -1,7 +1,5 @@
 package application;
 
-import backend.AnnualReportProcessor;
-import backend.MilkWeightData;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
