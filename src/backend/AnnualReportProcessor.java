@@ -130,7 +130,7 @@ public class AnnualReportProcessor {
 	 * @return
 	 */
 	public List<String> uniqueFarms() {
-		System.out.println(uniqueFarms);
+		Collections.sort(uniqueFarms);
 		return uniqueFarms;
 	}
 

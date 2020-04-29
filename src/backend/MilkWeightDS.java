@@ -22,7 +22,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
   @Override
   public void insert(MilkWeight mw) {
     if (mwTreeMap.containsKey(mw)) {
-      System.out.println("duplicate");
+      
       return;
     }
     //TREE MAP INSERTION
@@ -71,7 +71,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
         .subMap(new MilkWeight(yearFrom, monthFrom, dateFrom, "", 0), new MilkWeight(yearTo, monthTo, dateTo, "", 0))
         .entrySet()) {
       lst.add(item.getKey());
-      System.out.println(item.getKey());
+      
     }
     return lst;
   }
@@ -82,7 +82,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
     for (Entry<MilkWeight, MilkWeight> item : mwTreeMap
         .subMap(new MilkWeight(year, month, 0, "", 0), new MilkWeight(year, month, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      System.out.println(item.getKey());
+      
     }
     return lst;
   }
@@ -93,7 +93,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
     for (Entry<MilkWeight, MilkWeight> item : mwTreeMap
         .subMap(new MilkWeight(year, 0, 0, "", 0), new MilkWeight(year, 13, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      System.out.println(item.getKey());
+      
     }
     return lst;
   }
@@ -105,7 +105,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
     for (Entry<MilkWeight, MilkWeight> item : mwHashMap.get(farmID)
         .subMap(new MilkWeight(year, 0, 0, "", 0), new MilkWeight(year, 13, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      System.out.println(item.getKey());
+      
     }
     return lst;
   }
@@ -118,12 +118,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
     ds.insert(new MilkWeight(1699, 6, 11, "Farm 4", 469));
     ds.insert(new MilkWeight(1699, 3, 15, "Farm 1", 619));
     ds.insert(new MilkWeight(1699, 3, 12, "Farm 4", 619));
-//    System.out.println(ds.mwHashMap);
-//    System.out.println(ds.mwTreeMap);
-//    System.out.println(ds.removeEntry(new MilkWeight(1699, 3, 12, "Farm 4", 619)));
-//    System.out.println(ds.removeEntry(new MilkWeight(1699, 3, 12, "Farm 4", 619)));
-//    System.out.println(ds.mwHashMap);
-//    System.out.println(ds.mwTreeMap);
+
     ds.getMilkWeightFarm("Farm 4", 1699);
 
 
