@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -44,21 +43,21 @@ public class FarmReportProcessor {
 	 */
 	private void stats() {
 		List<MilkWeight> farmReport = ds.getMilkWeightFarm(farmId, year);
-		for(MilkWeight mw : farmReport) {
-			weights[mw.getMonth() - 1] += mw.getWeight();
-			if(mw.getWeight() > max[mw.getMonth() - 1]) max[mw.getMonth() - 1] = mw.getWeight();
-			if(mw.getWeight() < min[mw.getMonth() - 1]) min[mw.getMonth() - 1] = mw.getWeight();
-			avg[mw.getMonth() - 1] += 1;
+		for(MilkWeight mw : farmReport) { //iterate through all the data
+			weights[mw.getMonth() - 1] += mw.getWeight(); //add weight to corresponding month
+			if(mw.getWeight() > max[mw.getMonth() - 1]) max[mw.getMonth() - 1] = mw.getWeight(); //update max weight of month
+			if(mw.getWeight() < min[mw.getMonth() - 1]) min[mw.getMonth() - 1] = mw.getWeight(); //update min weight of month
+			avg[mw.getMonth() - 1] += 1; //(avg serves as temp counter) counts the number of MW in that month
 		}
 		
 		for(int month = 1; month <= 12; month++) {
 			List<MilkWeight> monthReport = ds.getMilkWeightMonth(month, year);
-			int sum = 0;
+			int sum = 0; //stores the sum of all weights from all farms in the month
 			for(MilkWeight mw : monthReport) {
 				sum += mw.getWeight();
 			}
-			percents[month - 1] = Math.round((double) weights[month - 1] * 10000 / sum) / 100.0;
-			avg[month - 1] = Math.round(weights[month - 1] * 100 / avg[month - 1]) / 100.0;
+			percents[month - 1] = Math.round((double) weights[month - 1] * 10000 / sum) / 100.0; //calculate farm's share for the month
+			avg[month - 1] = Math.round(weights[month - 1] * 100 / avg[month - 1]) / 100.0; //calculate farm's average weight for the month
 		}
 	}
 	
@@ -117,8 +116,8 @@ public class FarmReportProcessor {
 		PrintWriter output = null;
 		try {
 			output = new PrintWriter("farm_report.csv");
-			output.println("month,weight,percent,min,max,average");
-			for(int month = 1; month <= 12; month++) {
+			output.println("month,weight,percent,min,max,average"); //headers of the csv
+			for(int month = 1; month <= 12; month++) { //adds data to the csv month by month
 				String out = month + "," + weights[month - 1] + "," + percents[month - 1] + "," + min[month - 1] +
 						"," + max[month - 1] + "," + avg[month - 1];
 				output.println(out);
@@ -128,14 +127,5 @@ public class FarmReportProcessor {
 		} finally {
 			if(output != null) output.close();
 		}
-	}
-	
-	//testing
-	public static void main(String args[]) {
-		MilkWeightDS ds = new MilkWeightDS();
-		InputReader ir = new InputReader(new File("src/2019-1.csv"));
-		ir.getList().forEach(mw -> ds.insert(mw));
-		FarmReportProcessor frp = new FarmReportProcessor(ds, "Farm 100", 2019);
-		frp.toCSV();
 	}
 }

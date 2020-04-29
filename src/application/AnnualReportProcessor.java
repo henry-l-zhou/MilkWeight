@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -141,13 +140,13 @@ public class AnnualReportProcessor {
 		PrintWriter output = null;
 		try {
 			output = new PrintWriter("annual_report.csv");
-			output.println("farm_id,weight,percent,min,max,average");
+			output.println("farm_id,weight,percent,min,max,average"); //headers of the csv
 			List<String> farms = new LinkedList<String>();
-			for (String farmId : weights.keySet()) {
+			for (String farmId : weights.keySet()) { //adds all the farms to a list to be sorted
 				farms.add(farmId);
-			}
-			Collections.sort(farms);
-			for (String farmId : farms) {
+			} 
+			Collections.sort(farms); //sort the list
+			for (String farmId : farms) { //iterate through sorted list
 				output.println(farmId + "," + weights.get(farmId) + "," + percents.get(farmId) + "," + min.get(farmId)
 						+ "," + max.get(farmId) + "," + avg.get(farmId));
 			}
@@ -157,14 +156,5 @@ public class AnnualReportProcessor {
 			if (output != null)
 				output.close();
 		}
-	}
-
-	// testing
-	public static void main(String args[]) {
-		MilkWeightDS ds = new MilkWeightDS();
-		InputReader ir = new InputReader(new File("src/2019-1.csv"));
-		ir.getList().forEach(mw -> ds.insert(mw));
-		AnnualReportProcessor frp = new AnnualReportProcessor(ds, 2019);
-		frp.toCSV();
 	}
 }
