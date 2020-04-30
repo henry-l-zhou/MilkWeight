@@ -66,7 +66,7 @@ public class Main extends Application {
 
     DoubleProperty fontSize = new SimpleDoubleProperty(20); // font size in pt
     root.styleProperty().bind(Bindings.format("-fx-font-size: %.2fpt;", fontSize));
-    // Add the vertical box to the center of the root pane
+    // Add the vertical box to the center of the root panel
     root.setTop(titleLabel);
     BorderPane.setAlignment(titleLabel, Pos.CENTER);
     root.setLeft(editDataButton);
