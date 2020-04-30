@@ -1,19 +1,40 @@
-SAMPLE_PROFILE_SETTINGS = java -XX:+FlightRecorder -XX:StartFlightRecording=settings=profile,filename=sampleprofile_data.jfr
+.PHONY = make jar runjar test clean
 
-MY_PROFILE_SETTINGS = java -XX:+FlightRecorder -XX:StartFlightRecording=settings=profile,filename=myprofile_data.jfr
+# replace with path to your javac,java,jar,javafx installations
+JC = /usr/bin/javac     # replace with path to javac or javac.exe
+JAR = /usr/bin/jar      # replace with path to jar or jar.exe
+JAVA = /usr/bin/java    # replace with path to java or javaw.exe
+MP = --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml #-Dfile.encoding=UTF-8 
+CP = -classpath ".:application" 
+APP = application.Main
 
-junit5:
-	javac -cp .:./junit-platform-console-standalone-1.5.2.jar *.java
-	java -jar junit-platform-console-standalone-1.5.2.jar --class-path . -p ""
+#CLASSPATH = .:junit-platform-console-standalone-1.5.2.jar:json-simple-1.1.1.jar
 
-sample_profiler:
-	javac SampleProfilerApplication.java
-	$(SAMPLE_PROFILE_SETTINGS) SampleProfilerApplication 10000000
+make: 
+	$(JC) $(MP) $(CP) -d . application/*.java
 
-my_profiler:
-	javac MyProfiler.java
-	$(MY_PROFILE_SETTINGS) MyProfiler 10000000
+run:
+	$(JAVA) $(MP) $(CP) application.Main
+
+fx: 
+	$(JC) $(MP) $(CP) -d . application/*.java
+
+fxrun:
+	$(JAVA) $(MP) $(CP) $(APP)
+
+jar: 
+	$(JAR) cvmf manifest.txt executable.jar .
+
+runjar:
+	java $(MP) -jar executable.jar
+
+zip:
+	zip team.zip application/* *
+
+test: 
+	javac $(MP) -cp $(CLASSPATH) *.java
+	java -jar junit-platform-console-standalone-1.5.2.jar --class-path $(CLASSPATH) -p ""
 
 clean:
-	\rm -f *.class
-	\rm -f *.jfr
+	\rm application/*.class
+	\rm executable.jar
