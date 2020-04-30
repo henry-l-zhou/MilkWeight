@@ -110,18 +110,4 @@ public class MilkWeightDS implements MilkWeightDSADT {
     return lst;
   }
 
-  public static void main(String[] args) {
-    MilkWeightDS ds = new MilkWeightDS();
-    ds.insert(new MilkWeight(1699, 3, 11, "Farm 5", 69));
-    ds.insert(new MilkWeight(1699, 4, 11, "Farm 5", 619));
-    ds.insert(new MilkWeight(1699, 5, 11, "Farm 5", 169));
-    ds.insert(new MilkWeight(1699, 6, 11, "Farm 4", 469));
-    ds.insert(new MilkWeight(1699, 3, 15, "Farm 1", 619));
-    ds.insert(new MilkWeight(1699, 3, 12, "Farm 4", 619));
-
-    ds.getMilkWeightFarm("Farm 4", 1699);
-
-
-
-  }
 }

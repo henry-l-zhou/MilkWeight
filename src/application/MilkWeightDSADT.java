@@ -41,17 +41,32 @@ public interface MilkWeightDSADT {
   public List<MilkWeight> getMilkWeightDateRange(int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo,
       int yearTo);
 
+  /**
+   * checks if a MW is in the MilkWeightDS
+   * @param mw
+   * @return
+   */
   public boolean contains(MilkWeight mw);
   
   /**
-   * 
-   * @param date
-   * @return
+   * Returns the list of MilkWeights for that month and year
+   * @param month
+   * @param year
+   * @return List of MW
    */
   public List<MilkWeight> getMilkWeightMonth(int month, int year);
-
+  /**
+   * Returns the list of MilkWeights for that year
+   * @param year
+   * @return List of MW
+   */
   public List<MilkWeight> getMilkWeightYear(int year);
-
+  /**
+   * Returns the list of MilkWeights for that farm for the year
+   * @param year
+   * @param farmId
+   * @return List of MW
+   */
   public List<MilkWeight> getMilkWeightFarm(String farmID, int year);
 
 }
