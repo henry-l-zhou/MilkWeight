@@ -19,7 +19,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * GUI representation of the Edit Data page (navigational)
+ * @author ateam85
+ *
+ */
 public class EditDataPage extends Application{
   public void start(Stage primaryStage) {
     BorderPane root = new BorderPane();

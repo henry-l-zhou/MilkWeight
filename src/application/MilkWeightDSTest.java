@@ -9,7 +9,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DataStructureTest {
+/**
+ * Tests the MilkWeightDS
+ * @author ateam85
+ *
+ */
+class MilkWeightDSTest {
   MilkWeightDS ds;
   MilkWeight mw1;
   MilkWeight mw2;

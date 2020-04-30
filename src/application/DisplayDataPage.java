@@ -19,7 +19,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * GUI representation for the display data page
+ * @author ateam85
+ *
+ */
 public class DisplayDataPage extends Application{
 	
   public void start(Stage primaryStage) {

@@ -23,11 +23,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * The GUI representation of the Annual Report screen
+ * @author atem85
+ *
+ */
 public class AnnualReport extends Application {
-  public static final String APP_TITLE = "Annual Report";
-  private ObservableList<MilkWeightData> data;
-  private AnnualReportProcessor arp;
+  public static final String APP_TITLE = "Annual Report"; //title of the page
+  private ObservableList<MilkWeightData> data; //data to be displayed in the table
+  private AnnualReportProcessor arp; //gives stats to populate the table
   public void start(Stage primaryStage) {
 
     // GridPane setup
@@ -109,19 +113,17 @@ public class AnnualReport extends Application {
       try {
         arp = new AnnualReportProcessor(Main.ds, Integer.parseInt(year.getText()));
         data = FXCollections.observableArrayList();
-        for (String farmId : arp.uniqueFarms()) {
+        for (String farmId : arp.uniqueFarms()) { //for each farm add the data from the ARP to the observableList
           data.add(new MilkWeightData(farmId, String.valueOf(arp.getWeight(farmId)),
               String.valueOf(arp.getPercent(farmId)), String.valueOf(arp.getMin(farmId)), 
             		  String.valueOf(arp.getMax(farmId)), String.valueOf(arp.getAvg(farmId))));
         }
-        table.setItems(data);
+        table.setItems(data); //set the table with the observable list
         sendToCSV.setVisible(true);
-      } catch (Exception ex) {
+      } catch (Exception ex) { //if there is an error display a dialg
         InformationDialog info = new InformationDialog();
         info.tableFormatError(primaryStage, ex);
-        
       }
-
     });
 
     HBox hBox = new HBox(190);
@@ -137,7 +139,7 @@ public class AnnualReport extends Application {
     vBox.getChildren().addAll(table);
     root.add(vBox, 0, 2);
 
-    // set up Back and Home button
+    // set up Back button
     HBox hBox2 = new HBox();
     Button backButton = new Button("Back");
     backButton.setStyle("-fx-background-color: #C0C0C0; -fx-border-color: #000000");
@@ -150,6 +152,7 @@ public class AnnualReport extends Application {
       }
     });
     
+    //set up Home button
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 40);

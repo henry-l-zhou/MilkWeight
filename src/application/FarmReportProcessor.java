@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * This class processes a MilkWeightDS to get stats for a specific farm and year
- * @author Brian Hu
+ * @author ateam85
  *
  */
 public class FarmReportProcessor {

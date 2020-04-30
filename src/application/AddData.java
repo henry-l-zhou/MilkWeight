@@ -26,10 +26,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * GUI depiction of the add data page
+ * @author ateam85
+ *
+ */
 public class AddData extends Application {
-  public static final String APP_TITLE = "Add Data";
-
+  public static final String APP_TITLE = "Add Data"; //title of the page
+  
+  @Override
   public void start(Stage primaryStage) {
 
     // BorderPane setup
@@ -65,24 +70,21 @@ public class AddData extends Application {
     // file input setup
     FileChooser fc = new FileChooser();
     fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-    Button fileInput = new Button("Add By File Input");
+    Button fileInput = new Button("Add By File Input"); 
     fileInput.setMaxWidth(Double.MAX_VALUE);
     fileInput.setOnAction(e -> {
       InformationDialog info = new InformationDialog();
       File inputFile = fc.showOpenDialog(primaryStage);
       try {
-        InputReader ir = new InputReader(inputFile);
-        
-        //System.out.println(ir.getList());
-        
-        ir.getList().forEach(mw->Main.ds.insert(mw));
-        Main.ds.getMilkWeightFarm("Farm 0", 2019);
+        InputReader ir = new InputReader(inputFile); //reads the input file
+        ir.getList().forEach(mw->Main.ds.insert(mw)); //iterates through the data nad inserts into data structure
         info.inputFile(primaryStage, ir);
       } catch (Exception ex) {
         info.fileError(primaryStage, ex);
       }
     });
-
+    
+    //this vbox stores the elements in the left pane
     VBox vBox = new VBox();
     vBox.getChildren().addAll(clickText, displayButton, fileInput);
     vBox.setPadding(new Insets(35, 0, 0, 0));
@@ -108,14 +110,15 @@ public class AddData extends Application {
     addData.setOnAction(e -> {
       InformationDialog info = new InformationDialog();
       try {
-        MilkWeight item = InputReader.parseLine(farmID.getText(), date.getText(), milkWeight.getText());
-        Main.ds.insert(item);
+        MilkWeight item = InputReader.parseLine(farmID.getText(), date.getText(), milkWeight.getText()); //parses the data form the textfields
+        Main.ds.insert(item); //inserts the new item into the data structure
         info.add(primaryStage);
       } catch (Exception ex) {
         info.addError(primaryStage, ex);
       }
     });
-
+    
+    // this vbox stores the elements in the right pane
     VBox vBox2 = new VBox();
     vBox2.getChildren().addAll(date, farmID, milkWeight, addData);
     vBox2.setPadding(new Insets(20, 0, 0, 0));
@@ -133,7 +136,8 @@ public class AddData extends Application {
         ex.printStackTrace();
       }
     });
-
+    
+    //set up home button
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 35);

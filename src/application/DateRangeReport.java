@@ -23,11 +23,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * GUI representation of the date range report
+ * @author atem85
+ *
+ */
 public class DateRangeReport extends Application {
-	public static final String APP_TITLE = "Date Range Report";
-	private ObservableList<MilkWeightData> data;
-	private DateRangeReportProcessor drrp;
+	public static final String APP_TITLE = "Date Range Report"; //page title
+	private ObservableList<MilkWeightData> data; //observable list for the table
+	private DateRangeReportProcessor drrp; //provides stats on the data
 
 	public void start(Stage primaryStage) {
 
@@ -113,26 +117,30 @@ public class DateRangeReport extends Application {
 		displayData.setOnAction(e -> {
 
 			try {
+				//parse the date from text field
 				String[] fromDateSplit = startDate.getText().split("-");
 				String yearFrom = fromDateSplit[0];
 				String monthFrom = fromDateSplit[1];
 				String dateFrom = fromDateSplit[2];
-
+				
+				//parse the date to text field
 				String[] toDateSplit = endDate.getText().split("-");
 				String yearTo = toDateSplit[0];
 				String monthTo = toDateSplit[1];
 				String dateTo = toDateSplit[2];
+				
+				//get the stats for the date range
 				drrp = new DateRangeReportProcessor(Main.ds, Integer.parseInt(dateFrom), Integer.parseInt(monthFrom),
 						Integer.parseInt(yearFrom), Integer.parseInt(dateTo), Integer.parseInt(monthTo),
 						Integer.parseInt(yearTo));
 				data = FXCollections.observableArrayList();
 
-				for (String farmId : drrp.uniqueFarms()) {
+				for (String farmId : drrp.uniqueFarms()) { //for each farm, add a new row with stats from the DRRP
 					data.add(new MilkWeightData(farmId, String.valueOf(drrp.getWeight(farmId)),
 							String.valueOf(drrp.getPercent(farmId)), String.valueOf(drrp.getMin(farmId)),
 							String.valueOf(drrp.getMax(farmId)), String.valueOf(drrp.getAvg(farmId))));
 				}
-				table.setItems(data);
+				table.setItems(data); //set the observable list to the table
 				sendToCSV.setVisible(true);
 			} catch (Exception ex) {
 				InformationDialog info = new InformationDialog();

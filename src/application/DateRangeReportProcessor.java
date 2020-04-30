@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * This class processes a MilkWeightDS to get stats for a specific date range
  * 
- * @author Brian Hu
+ * @author ateam85
  *
  */
 public class DateRangeReportProcessor {
