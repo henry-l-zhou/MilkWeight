@@ -153,7 +153,7 @@ public class DateRangeReportProcessor {
 	public void toCSV() {
 		PrintWriter output = null;
 		try {
-			output = new PrintWriter("date_range_report.csv");
+			output = new PrintWriter("sample_output_csv/date_range_report.csv");
 			output.println("farm_id,weight,percent,min,max,average"); // headers of the csv
 			List<String> farms = new LinkedList<String>();
 			for (String farmId : weights.keySet()) { // adds all the farms to a list to be sorted

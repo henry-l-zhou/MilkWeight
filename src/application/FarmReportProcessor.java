@@ -115,7 +115,7 @@ public class FarmReportProcessor {
 	public void toCSV() {
 		PrintWriter output = null;
 		try {
-			output = new PrintWriter("farm_report.csv");
+			output = new PrintWriter("sample_output_csv/farm_report.csv");
 			output.println("month,weight,percent,min,max,average"); //headers of the csv
 			for(int month = 1; month <= 12; month++) { //adds data to the csv month by month
 				String out = month + "," + weights[month - 1] + "," + percents[month - 1] + "," + min[month - 1] +
