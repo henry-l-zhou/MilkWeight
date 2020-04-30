@@ -1,4 +1,4 @@
-## MilkWeight
+# MilkWeight
 
 Course: cs400
 Semester: Spring 2020
@@ -12,18 +12,18 @@ Team Members:
 
  
 
-# Which team members were on same xteam together?
+## Which team members were on same xteam together?
 None
 
-# Known Bugs:
+## Known Bugs:
 - Date input is not validated (i.e. can input 2019-2-30 (February 30, 2019))
 
-# Future Work:
+## Future Work:
 - Further input validation
 - More statistics and more customizable reports
 - Allow user to fix/delete erronous data when uploading files
 - GUI layout design and size
 - Consistency in the backend
 
-# Other notes or comments to the grader:
+## Other notes or comments to the grader:
 None
