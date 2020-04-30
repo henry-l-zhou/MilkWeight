@@ -5,11 +5,24 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * This class checks for valid inputs in the file
+ * 
+ * @author ateam85
+ *
+ */
 public class InputReader {
 	private File file;
 	private List<MilkWeight> mwList;
 
+	/**
+	 * parses a line of input code and returns a new milkweight object
+	 * @param farmId
+	 * @param dateInput
+	 * @param weightInput
+	 * @return MW object
+	 * @throws FormatException
+	 */
 	public static MilkWeight parseLine(String farmId, String dateInput, String weightInput) throws FormatException {
 		int year, month, date, weight;
 		if (farmId == null || dateInput == null || weightInput == null) {
@@ -35,12 +48,21 @@ public class InputReader {
 		return new MilkWeight(year, month, date, farmId, weight);
 	}
 
+	/**
+	 * Takes in a file and parses it
+	 * @param file
+	 * @throws FormatException
+	 */
 	public InputReader(File file) throws FormatException {
 		this.file = file;
 		mwList = new LinkedList<MilkWeight>();
 		parseFile();
 	}
 
+	/**
+	 * parses a file and throws format exception if the input is wrong
+	 * @throws FormatException
+	 */
 	private void parseFile() throws FormatException {
 		Scanner sc = null;
 		try {

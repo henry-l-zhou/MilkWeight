@@ -1,5 +1,10 @@
 package application;
-
+/**
+ * This class popups a box for the gui
+ * 
+ * @author ateam85
+ *
+ */
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

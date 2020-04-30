@@ -17,7 +17,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * This class sets up the main gui page
+ * 
+ * @author ateam85
+ *
+ */
 public class Main extends Application {
   public static final int WINDOW_WIDTH = 600;
   public static final int WINDOW_HEIGHT = 400;
@@ -25,7 +30,10 @@ public class Main extends Application {
   public static final String APP_TITLE = "Milk Weight Data Visualizer";
   private static Stack<Application> history = new Stack<Application>();
   public static MilkWeightDS ds;
-
+/**
+ * This starts the application
+ * @param primaryStage
+ */
   public void start(Stage primaryStage) {
 
     // BorderPane setup
@@ -82,15 +90,26 @@ public class Main extends Application {
     primaryStage.show();
   }
 
+  /**
+   * Used for the backbutton. Whenever a user clicks on a new page, adds it to the history
+   * @param stage
+   */
   public static void addHistory(Application stage) {
     history.push(stage);
   }
-
+  /**
+   * Used for the backbutton. Whenever a user clicks on an old page gets the last page seen
+   * @param stage
+   */
   public static Application lastUsedStage() {
     history.pop();
     return history.peek() == null ? new Main() : history.peek();
   }
 
+  /**
+   * Runs the main method
+   * @param args used for cmd line
+   */
   public static void main(String[] args) {
     history.push(new Main());
     ds = new MilkWeightDS();

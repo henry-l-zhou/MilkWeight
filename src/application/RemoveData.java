@@ -21,9 +21,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * This class sets up the remove page for the gui application
+ * 
+ * @author ateam85
+ *
+ */
 public class RemoveData extends Application {
   public static final String APP_TITLE = "Remove Data";
 
+  /**
+   * starts the scene
+   * @param primaryStage
+   */
   public void start(Stage primaryStage) {
 
     // BorderPane setup
@@ -85,7 +95,7 @@ public class RemoveData extends Application {
         if (Main.ds.removeEntry(mw)) {
           info.remove(primaryStage);
         } else {
-          
+
           info.removeError(primaryStage, new Exception("Entry could not be found"));
         }
       } catch (Exception ex) {
@@ -118,13 +128,10 @@ public class RemoveData extends Application {
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 35);
-    homeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        Main main = new Main();
-        main.start(primaryStage);
-        Main.addHistory(main);
-      }
+    homeButton.setOnAction(e -> {
+      Main main = new Main();
+      main.start(primaryStage);
+      Main.addHistory(main);
     });
 
     hBox.getChildren().addAll(backButton, homeButton);

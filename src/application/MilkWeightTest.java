@@ -1,5 +1,9 @@
 package application;
-
+/**
+ * Testing Methods for the MilkWeight
+ * 
+ * @author ateam85
+ */
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;

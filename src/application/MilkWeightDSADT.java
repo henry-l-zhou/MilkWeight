@@ -2,7 +2,12 @@ package application;
 
 import java.util.List;
 import java.util.Set;
-
+/**
+ * This class sets the data structure adt that holds all the inputed data
+ * 
+ * @author ateam85
+ *
+ */
 public interface MilkWeightDSADT {
   /**
    * Adds a new farmID,  date and milkWeight  entry 

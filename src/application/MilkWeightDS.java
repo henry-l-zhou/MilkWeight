@@ -9,10 +9,19 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * This class sets the data structure that holds all the inputed data
+ * 
+ * @author ateam85
+ *
+ */
 public class MilkWeightDS implements MilkWeightDSADT {
   private TreeMap<MilkWeight, MilkWeight> mwTreeMap;
   private Map<String, TreeMap<MilkWeight, MilkWeight>> mwHashMap;
 
+  /**
+   * initializes ds
+   */
   public MilkWeightDS() {
     mwTreeMap = new TreeMap<MilkWeight, MilkWeight>();
     mwHashMap = new HashMap<String, TreeMap<MilkWeight, MilkWeight>>();
@@ -22,7 +31,7 @@ public class MilkWeightDS implements MilkWeightDSADT {
   @Override
   public void insert(MilkWeight mw) {
     if (mwTreeMap.containsKey(mw)) {
-      
+
       return;
     }
     //TREE MAP INSERTION
@@ -39,8 +48,9 @@ public class MilkWeightDS implements MilkWeightDSADT {
 
   @Override
   public boolean removeEntry(MilkWeight mw) {
+    // HASHMAP AND TREEMAP REMOVAL
     mwHashMap.get(mw.getFarmId()).remove(mw);
-    //mwTreeMap.remove(mw);
+
     return mwTreeMap.remove(mw) != null;
   }
 
@@ -49,63 +59,69 @@ public class MilkWeightDS implements MilkWeightDSADT {
     return mwHashMap.size();
   }
 
-  @Override 
-  public Set<String> getFarms(){
+  @Override
+  public Set<String> getFarms() {
     return mwHashMap.keySet();
-    
+
   }
+
   @Override
   public int getEntries() {
     return mwTreeMap.size();
   }
-  
+
   @Override
   public boolean contains(MilkWeight mw) {
     return mwTreeMap.containsKey(mw);
   }
+
   @Override
   public List<MilkWeight> getMilkWeightDateRange(int dateFrom, int monthFrom, int yearFrom, int dateTo, int monthTo,
       int yearTo) {
+    // uses the treemap method submap to get a range of data
     ArrayList<MilkWeight> lst = new ArrayList<MilkWeight>();
     for (Entry<MilkWeight, MilkWeight> item : mwTreeMap
         .subMap(new MilkWeight(yearFrom, monthFrom, dateFrom, "", 0), new MilkWeight(yearTo, monthTo, dateTo, "", 0))
         .entrySet()) {
       lst.add(item.getKey());
-      
+
     }
     return lst;
   }
 
   @Override
   public List<MilkWeight> getMilkWeightMonth(int month, int year) {
+    // uses the treemap method submap to get a range of data
     ArrayList<MilkWeight> lst = new ArrayList<MilkWeight>();
     for (Entry<MilkWeight, MilkWeight> item : mwTreeMap
         .subMap(new MilkWeight(year, month, 0, "", 0), new MilkWeight(year, month, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      
+
     }
     return lst;
   }
 
   @Override
   public List<MilkWeight> getMilkWeightYear(int year) {
+    // uses the treemap method submap to get a range of data
     ArrayList<MilkWeight> lst = new ArrayList<MilkWeight>();
     for (Entry<MilkWeight, MilkWeight> item : mwTreeMap
         .subMap(new MilkWeight(year, 0, 0, "", 0), new MilkWeight(year, 13, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      
+
     }
     return lst;
   }
 
   @Override
   public List<MilkWeight> getMilkWeightFarm(String farmID, int year) {
+    // uses the treemap method submap to get a range of data
     if (mwHashMap.get(farmID) == null) return null;
     ArrayList<MilkWeight> lst = new ArrayList<MilkWeight>();
     for (Entry<MilkWeight, MilkWeight> item : mwHashMap.get(farmID)
         .subMap(new MilkWeight(year, 0, 0, "", 0), new MilkWeight(year, 13, 32, "", 0)).entrySet()) {
       lst.add(item.getKey());
-      
+
     }
     return lst;
   }

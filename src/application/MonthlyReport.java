@@ -26,10 +26,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * This class sets the monthly report of the gui
+ * 
+ * @author ateam85
+ *
+ */
 public class MonthlyReport extends Application {
   public static final String APP_TITLE = "Monthly Report";
   private ObservableList<MilkWeightData> data;
   private MonthlyReportProcessor mrp;
+
+  /**
+   * starts the application
+   * @param primaryStage
+   */
   public void start(Stage primaryStage) {
 
     // GridPane setup
@@ -65,14 +76,14 @@ public class MonthlyReport extends Application {
     sendToCSV.setMinSize(100, 40);
     sendToCSV.setOnAction(e -> {
       InformationDialog info = new InformationDialog();
-      if (mrp != null ) {
+      if (mrp != null) {
         mrp.toCSV();
         info.toCSV(primaryStage);
       } else {
         info.toCSVInvalid(primaryStage, new Exception("CSV could not be created"));
       }
     });
-    
+
     // set up Table of Data
     TableView<MilkWeightData> table = new TableView<MilkWeightData>();
     table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
@@ -98,37 +109,36 @@ public class MonthlyReport extends Application {
     minCol.setMinWidth(100);
     minCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("min"));
     minCol.setStyle("-fx-alignment: CENTER;");
-    
+
     TableColumn maxCol = new TableColumn("Max");
     maxCol.setMinWidth(100);
     maxCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("max"));
     maxCol.setStyle("-fx-alignment: CENTER;");
-    
+
     TableColumn avgCol = new TableColumn("Average");
     avgCol.setMinWidth(100);
     avgCol.setCellValueFactory(new PropertyValueFactory<MilkWeightData, String>("avg"));
     avgCol.setStyle("-fx-alignment: CENTER;");
-    
+
     // set up Display Data
     Button displayData = new Button("Display Data");
     displayData.setMaxWidth(Double.MAX_VALUE);
     displayData.setOnAction(e -> {
 
       try {
-        mrp =
-            new MonthlyReportProcessor(Main.ds, Integer.parseInt(month.getText()), Integer.parseInt(year.getText()));
+        mrp = new MonthlyReportProcessor(Main.ds, Integer.parseInt(month.getText()), Integer.parseInt(year.getText()));
         data = FXCollections.observableArrayList();
-        
+
         for (String farmId : mrp.uniqueFarms()) {
           data.add(new MilkWeightData(farmId, String.valueOf(mrp.getWeight(farmId)),
-              String.valueOf(mrp.getPercent(farmId)), String.valueOf(mrp.getMin(farmId)), 
-    		  String.valueOf(mrp.getMax(farmId)), String.valueOf(mrp.getAvg(farmId))));
+              String.valueOf(mrp.getPercent(farmId)), String.valueOf(mrp.getMin(farmId)),
+              String.valueOf(mrp.getMax(farmId)), String.valueOf(mrp.getAvg(farmId))));
         }
         table.setItems(data);
         sendToCSV.setVisible(true);
       } catch (Exception ex) {
         InformationDialog info = new InformationDialog();
-        info.tableFormatError(primaryStage,ex);
+        info.tableFormatError(primaryStage, ex);
       }
 
     });
@@ -168,13 +178,12 @@ public class MonthlyReport extends Application {
     Button homeButton = new Button("Home");
     homeButton.setStyle("-fx-background-color: #FFB6C1; -fx-border-color: #000000");
     homeButton.setMinSize(100, 40);
-    homeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent arg0) {
-        Main main = new Main();
-        main.start(primaryStage);
-        Main.addHistory(main);
-      }
+    homeButton.setOnAction(e -> {
+
+      Main main = new Main();
+      main.start(primaryStage);
+      Main.addHistory(main);
+
     });
 
     hBox2.getChildren().addAll(backButton, sendToCSV, homeButton);
